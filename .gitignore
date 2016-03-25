@@ -1,0 +1,7 @@
+OpenGLSidescroller/Spritesheets/
+OpenGLSidescroller/Textures/
+deps/
+*.VC.db
+ipch/
+Debug/
+*.suo
