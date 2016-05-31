@@ -14,9 +14,7 @@ Game::Game(GLfloat width, GLfloat height) :
 	Init();
 }
 
-Game::~Game()
-{
-}
+Game::~Game() {}
 
 void Game::Init()
 {
@@ -54,14 +52,13 @@ void Game::GameLoop()
 		Update(elapsedTime);
 		camera.Update(elapsedTime);
 
-		glClearColor(0.2f, 0.1f, 0.7f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Draw();
 
 		glfwSwapBuffers(window.GetWindow());
 	}
-
 }
 
 void Game::Update(GLfloat elapsedTime)

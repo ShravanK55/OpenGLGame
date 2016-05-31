@@ -25,8 +25,13 @@ public:
 	void SetPosition(const glm::vec2& position);
 	void SetScale(const GLfloat& scale);
 	
+	// Initializes the camera. Sets up the required ortho matrix and translates it to the centre of the screen.
 	void Init(GLfloat screenWidth, GLfloat screenHeight);
+
+	// Updates the camera when needed to move to it's new position.
 	void Update(GLfloat elapsedTime);
+
+	// Moves the camera in the required direction and signals it to update.
 	void Move(MovementDirection direction, GLfloat elapsedTime);
 
 private:

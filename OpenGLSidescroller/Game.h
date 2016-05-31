@@ -11,16 +11,29 @@ class Game
 {
 public:
 	Game();
-	Game(GLfloat width, GLfloat height);
 	~Game();
 
+	// Constructor that calls the init function with the width and height passed.
+	Game(GLfloat width, GLfloat height);
+
+	// Initializes the game, creates window, sets up the camera, loads shaders and sets up the spritebatch.
 	void Init();
+
+	// The main game loop, handling input, calling update and draw functions.
 	void GameLoop();
+
+	// Calls the update function of each component of the game, passing in the time elapsed since the last frame.
 	void Update(GLfloat elapsedTime);
+
+	// Draws objects to the screen.
 	void Draw();
+
+	// Handles the input.
 	void ProcessInput(GLfloat elapsedTime);
 
+	// Function to check if a key was pressed.
 	static GLboolean wasKeyPressed(GLuint key);
+	// Function to check if a key was released.
 	static GLboolean wasKeyReleased(GLuint key);
 
 private:

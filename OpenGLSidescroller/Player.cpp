@@ -5,7 +5,7 @@
 Player::Player() {}
 
 Player::Player(glm::vec2 spawnPoint, GLfloat runSpeed) :
-	AnimatedSprite("Textures/AltairSpriteSheet.png", "altair", glm::vec2(spawnPoint.x, spawnPoint.y), glm::vec2(96.0f, 84.0f), 0.08f, GL_TRUE),
+	AnimatedSprite("Textures/AltairSpriteSheet.png", "Altair", glm::vec2(spawnPoint.x, spawnPoint.y), glm::vec2(96.0f, 84.0f), 0.08f, GL_TRUE),
 	dx(0), dy(0),
 	facing(Direction::RIGHT),
 	runSpeed(runSpeed)
@@ -24,7 +24,7 @@ const GLfloat Player::GetY() const { return posY; }
 void Player::Update(GLfloat elapsedTime)
 {
 	this->posX += dx * elapsedTime;
-
+	this->posY += dy * elapsedTime;
 	AnimatedSprite::Update(elapsedTime);
 }
 

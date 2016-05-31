@@ -1,6 +1,14 @@
 #pragma once
 #include "AnimatedSprite.h"
 
+enum class Player_State
+{
+	IDLE,
+	RUNNING,
+	JUMPING,
+	ATTACKING
+};
+
 enum class Direction
 {
 	LEFT,
