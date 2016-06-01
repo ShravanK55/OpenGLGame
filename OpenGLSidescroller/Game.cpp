@@ -78,31 +78,21 @@ void Game::Draw()
 
 void Game::ProcessInput(GLfloat elapsedTime)
 {
-	if (wasKeyPressed(GLFW_KEY_A) && wasKeyPressed(GLFW_KEY_D))
+	if (window.input->WasKeyPressed(GLFW_KEY_A) && window.input->WasKeyPressed(GLFW_KEY_D))
 		player.StopMoving();
-	else if (wasKeyPressed(GLFW_KEY_A))
+	else if (window.input->WasKeyPressed(GLFW_KEY_A))
 		player.MoveLeft();
-	else if (wasKeyPressed(GLFW_KEY_D))
+	else if (window.input->WasKeyPressed(GLFW_KEY_D))
 		player.MoveRight();
-	if (!wasKeyPressed(GLFW_KEY_A) && !wasKeyPressed(GLFW_KEY_D))
+	if (!window.input->WasKeyPressed(GLFW_KEY_A) && !window.input->WasKeyPressed(GLFW_KEY_D))
 		player.StopMoving();
 
-	if (wasKeyPressed(GLFW_KEY_UP))
+	if (window.input->WasKeyPressed(GLFW_KEY_UP))
 		camera.Move(MovementDirection::UP, elapsedTime);
-	if (wasKeyPressed(GLFW_KEY_DOWN))
+	if (window.input->WasKeyPressed(GLFW_KEY_DOWN))
 		camera.Move(MovementDirection::DOWN, elapsedTime);
-	if (wasKeyPressed(GLFW_KEY_RIGHT))
+	if (window.input->WasKeyPressed(GLFW_KEY_RIGHT))
 		camera.Move(MovementDirection::RIGHT, elapsedTime);
-	if (wasKeyPressed(GLFW_KEY_LEFT))
+	if (window.input->WasKeyPressed(GLFW_KEY_LEFT))
 		camera.Move(MovementDirection::LEFT, elapsedTime);
-}
-
-GLboolean Game::wasKeyPressed(GLuint key)
-{
-	return Window::keys[key];
-}
-
-GLboolean Game::wasKeyReleased(GLuint key)
-{
-	return !(Window::keys[key]);
 }

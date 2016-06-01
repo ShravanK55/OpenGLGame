@@ -1,6 +1,7 @@
 #include "Input.h"
 
 
+GLboolean Input::keys[1024];
 
 Input::Input()
 {

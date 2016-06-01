@@ -6,22 +6,23 @@
 #include <GLFW/glfw3.h>
 
 #include "Globals.h"
+#include "Input.h"
 
 class Window
 {
 public:
+	Input* input;
+
 	Window();
+	Window(Input* input);
 	~Window();
 
 	GLFWwindow* GetWindow() const;
+	Input* GetInput(Input* input);
+	void SetInput(Input* input);
 
-	// Creates the window.
+	// Creates the window and input.
 	GLboolean CreateWindow(GLsizei screenWidth, GLsizei screenHeight, const std::string& windowName);
-
-	// A keyboard callback function, called when the user interacts with the keyboard.
-	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-
-	static GLboolean keys[1024];
 
 private:
 	GLFWwindow* window;

@@ -31,11 +31,6 @@ public:
 	// Handles the input.
 	void ProcessInput(GLfloat elapsedTime);
 
-	// Function to check if a key was pressed.
-	static GLboolean wasKeyPressed(GLuint key);
-	// Function to check if a key was released.
-	static GLboolean wasKeyReleased(GLuint key);
-
 private:
 	Window window;
 	GLfloat width, height;

@@ -1,23 +1,31 @@
 #include "Window.h"
 
 
-GLboolean Window::keys[1024];
-
 Window::Window() :
 	window(nullptr),
 	width(Global::SCREEN_WIDTH),
 	height(Global::SCREEN_HEIGHT)
-{
-	for (int i = 0; i < 1024; i++)
-		keys[i] = false;
-}
+{}
+
+Window::Window(Input* input) :
+	window(nullptr),
+	width(Global::SCREEN_WIDTH),
+	height(Global::SCREEN_HEIGHT),
+	input(input)
+{}
 
 Window::~Window()
 {
+	if (input != nullptr)
+		delete input;
 	glfwTerminate();
 }
 
 GLFWwindow* Window::GetWindow() const { return window; }
+
+Input* Window::GetInput(Input* input) { return input; }
+
+void Window::SetInput(Input* input) { this->input = input; }
 
 GLboolean Window::CreateWindow(GLsizei screenWidth, GLsizei screenHeight, const std::string& windowName)
 {
@@ -47,27 +55,16 @@ GLboolean Window::CreateWindow(GLsizei screenWidth, GLsizei screenHeight, const 
 		return GL_FALSE;
 	}
 
-	glfwSetKeyCallback(window, key_callback);
+	if (input == nullptr)
+		input = new Input();
+
+	if (input != nullptr)
+		glfwSetKeyCallback(window, input->key_callback);
+
 	glViewport(0, 0, width, height);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	return GL_TRUE;
-}
-
-void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
-
-	if (key >= 0 && key < 1024)
-	{
-		if (action == GLFW_PRESS)
-			keys[key] = true;
-		if (action == GLFW_RELEASE)
-			keys[key] = false;
-	}
 }
