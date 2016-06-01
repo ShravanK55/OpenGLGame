@@ -12,8 +12,13 @@ public:
 	AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha = false);
 	~AnimatedSprite();
 
+	// Plays the specified animation.
 	void PlayAnimation(const std::string& animation, GLboolean once = false);
+
+	// Updates the animated sprite frame counter.
 	virtual void Update(GLfloat elapsedTime);
+
+	// Passes the sprite's information to the spritebatch from which it is drawn.
 	virtual void Draw();
 
 protected:
@@ -23,11 +28,19 @@ protected:
 
 	void SetVisible(GLboolean visible);
 
+	// Adds an animation to the list of animations.
 	void AddAnimation(const std::string& name, GLint frames, GLfloat x, GLfloat y, GLfloat width, GLfloat height, glm::vec2 offset);
+
+	// Clears the list of animations and offsets.
 	void ResetAnimations();
+
+	// Stops the current animation.
 	void StopAnimation();
 
+	// Logic that happens when an animation is done.
 	virtual void AnimationDone(std::string currentAnimation);
+
+	// A function used to setup a sprite's animation when the sprite is instantiated.
 	virtual void SetupAnimations();
 
 private:

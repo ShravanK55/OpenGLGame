@@ -10,14 +10,6 @@
 #include "Shader.h"
 
 
-enum class GlyphSortType
-{
-	NONE,
-	FRONT_TO_BACK,
-	BACK_TO_FRONT,
-	TEXTURE
-};
-
 // Contains information regarding a particular object to be drawn to the screen.
 struct Glyph
 {
@@ -28,6 +20,15 @@ struct Glyph
 	Vertex bottomLeft;
 	Vertex topRight;
 	Vertex bottomRight;
+};
+
+// Type of sorting to be done on glyphs.
+enum class GlyphSortType
+{
+	NONE,
+	FRONT_TO_BACK,
+	BACK_TO_FRONT,
+	TEXTURE
 };
 
 // Contains details about the batch that we are about to render.
@@ -52,6 +53,7 @@ public:
 
 	// Begins the batch process, sets the sort type and clears all previous render batches.
 	void Begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
+
 	// Ends the batch process, orders all the glyphs by the required sort type and calls the CreateRenderBatches() function.
 	void End();
 

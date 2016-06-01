@@ -17,9 +17,14 @@ public:
 	Shader();
 	~Shader();
 
+	// Uses the shader program.
 	Shader& Use();
+
+	// Compiles the vertex, fragment and geometry shaders from the specified source code.
 	void Compile(const GLchar* vShaderSource, const GLchar* fShaderSource, const GLchar* gShaderSource = nullptr);
+	// Checks for errors that occurred in compilation.
 	void CheckCompileErrors(GLuint object, std::string type);
+	// Returns the shader program ID.
 	GLint GetProgram() const;
 
 	void SetFloat(const GLchar* name, GLfloat value, GLboolean useShader = false);

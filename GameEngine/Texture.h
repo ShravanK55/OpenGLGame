@@ -13,7 +13,9 @@ public:
 	Texture();
 	~Texture();
 
+	// Generates the texture from the source.
 	void Generate(unsigned char* source, int width, int height);
+	// Binds the texture.
 	void Bind() const;
 
 	GLuint GetInternalFormat();

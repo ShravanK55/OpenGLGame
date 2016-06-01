@@ -1,5 +1,6 @@
 #pragma once
 #include "AnimatedSprite.h"
+#include "GameObject.h"
 
 enum class Player_State
 {
@@ -41,3 +42,16 @@ private:
 	GLfloat runSpeed;
 };
 
+//class Player : public GameObject
+//{
+//public:
+//	Player();
+//	Player(glm::vec2 spawnPoint);
+//	~Player();
+//
+//	void Update(GLfloat elapsedTime);
+//	void Draw();
+//
+//private:
+//
+//};

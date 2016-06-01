@@ -15,8 +15,10 @@ public:
 
 	GLFWwindow* GetWindow() const;
 
+	// Creates the window.
 	GLboolean CreateWindow(GLsizei screenWidth, GLsizei screenHeight, const std::string& windowName);
 
+	// A keyboard callback function, called when the user interacts with the keyboard.
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 	static GLboolean keys[1024];
