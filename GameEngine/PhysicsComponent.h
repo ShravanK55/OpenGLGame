@@ -2,17 +2,34 @@
 #include <GLM/glm.hpp>
 #include "Component.h"
 
-class UpdateComponent : public Component
+class PhysicsComponent : public Component
 {
 public:
-	UpdateComponent() {}
-	UpdateComponent(Entity* owner) :
-		Component(owner)
+	PhysicsComponent() :
+		position(glm::vec2(0, 0)),
+		size(glm::vec2(0, 0))
 	{}
-	virtual ~UpdateComponent() {}
+
+	PhysicsComponent(Entity* owner) :
+		Component(owner),
+		position(glm::vec2(0, 0)),
+		size(glm::vec2(0, 0))
+	{}
+
+	PhysicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size) :
+		Component(owner),
+		position(spawnPoint),
+		size(size)
+	{}
+
+	virtual ~PhysicsComponent() {}
+
+	glm::vec2 GetPosition() const { return position; }
+	glm::vec2 GetSize() const { return size; }
 
 	virtual void Update(GLfloat elapsedTime) {}
 
-private:
+protected:
 	glm::vec2 position;
+	glm::vec2 size;
 };

@@ -1,15 +1,6 @@
 #pragma once
 #include <iostream>
-#include <string>
 #include <map>
-
-#include <fstream>
-#include <sstream>
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
-#include <SOIL/SOIL.h>
 
 #include "Shader.h"
 #include "Texture.h"

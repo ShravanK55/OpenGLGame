@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include "Input.h"
 
 class Entity;
 
@@ -11,7 +11,9 @@ public:
 	
 	void SetOwner(Entity* owner) { this->owner = owner; }
 
+	virtual void HandleInput(Input* input) {}
 	virtual void Update(GLfloat elapsedTime) = 0;
+	virtual void Draw() {}
 
 protected:
 	Component(Entity* owner) : owner(owner) {}

@@ -1,7 +1,5 @@
 #pragma once
-#include <GL/glew.h>
 #include <GLM/glm.hpp>
-#include <GLM/gtc/matrix_transform.hpp>
 
 #include "Globals.h"
 

@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-
 #include "ResourceManager.h"
 #include "Camera2D.h"
 #include "Window.h"
@@ -32,10 +30,10 @@ public:
 	void ProcessInput(GLfloat elapsedTime);
 
 private:
-	Window window;
+	Window* window;
 	GLfloat width, height;
-	Player player;
-	Camera2D camera;
-	SpriteBatch spriteBatch;
+	Player* player;
+	Camera2D* camera;
+	SpriteBatch* spriteBatch;
 };
 

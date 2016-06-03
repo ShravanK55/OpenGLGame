@@ -1,15 +1,16 @@
 #include "AnimatedSprite.h"
-
+#include "SpriteBatch.h"
 
 
 AnimatedSprite::AnimatedSprite() :
+	Sprite(),
 	timeToUpdate(0),
 	currentAnimationOnce(false),
 	currentAnimation(""),
 	frameIndex(0),
 	timeElapsed(0),
 	visible(true)
-{ Sprite(); }
+{}
 
 AnimatedSprite::AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha) :
 	Sprite(filePath, name, position, size, alpha),
@@ -19,9 +20,7 @@ AnimatedSprite::AnimatedSprite(const GLchar* filePath, const GLchar* name, const
 	frameIndex(0),
 	timeElapsed(0),
 	visible(true)
-{
-	SetupAnimations();
-}
+{}
 
 AnimatedSprite::~AnimatedSprite()
 {
@@ -58,16 +57,15 @@ void AnimatedSprite::Update(GLfloat elapsedTime)
 				SetVisible(false);
 
 			frameIndex = 0;
-			AnimationDone(currentAnimation);
 		}
 	}
 }
 
-void AnimatedSprite::Draw()
+void AnimatedSprite::Draw(glm::vec2 position)
 {
 	if (visible)
 	{
-		SpriteBatch::Draw(texture, animations[currentAnimation][frameIndex], glm::vec4(posX, posY, width, height), 0.0f);
+		SpriteBatch::Draw(texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f);
 	}
 }
 
@@ -101,13 +99,4 @@ void AnimatedSprite::ResetAnimations()
 void AnimatedSprite::StopAnimation()
 {
 	frameIndex = 0;
-	AnimationDone(currentAnimation);
-}
-
-void AnimatedSprite::AnimationDone(std::string currentAnimation)
-{
-}
-
-void AnimatedSprite::SetupAnimations()
-{
 }

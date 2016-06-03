@@ -1,14 +1,21 @@
 #pragma once
 #include <vector>
-#include <GL/glew.h>
 #include "Component.h"
 
 
 class Entity
 {
 public:
-	virtual ~Entity() {}
+	virtual ~Entity()
+	{
+		for (int i = 0; i < components.size(); i++)
+		{
+			delete components[i];
+		}
+	}
+
 	virtual void Update(GLfloat elapsedTime) = 0;
+
 	virtual void AddComponent(Component* component)
 	{
 		component->SetOwner(this);
@@ -17,8 +24,6 @@ public:
 
 protected:
 	Entity() {}
-
-private:
 	std::vector<Component*> components;
 };
 

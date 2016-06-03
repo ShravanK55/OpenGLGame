@@ -1,8 +1,5 @@
 #pragma once
 #include <vector>
-#include <algorithm>
-
-#include <GL/glew.h>
 #include <GLM/glm.hpp>
 
 #include "Vertex.h"

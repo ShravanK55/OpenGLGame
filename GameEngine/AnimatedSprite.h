@@ -8,28 +8,19 @@
 class AnimatedSprite : public Sprite
 {
 public:
-	AnimatedSprite();
-	AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha = false);
-	~AnimatedSprite();
-
-	// Plays the specified animation.
-	void PlayAnimation(const std::string& animation, GLboolean once = false);
-
-	// Updates the animated sprite frame counter.
-	virtual void Update(GLfloat elapsedTime);
-
-	// Passes the sprite's information to the spritebatch from which it is drawn.
-	virtual void Draw();
-
-protected:
 	GLfloat timeToUpdate;
 	GLboolean currentAnimationOnce;
 	std::string currentAnimation;
 
-	void SetVisible(GLboolean visible);
+	AnimatedSprite();
+	AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha = false);
+	~AnimatedSprite();
 
 	// Adds an animation to the list of animations.
 	void AddAnimation(const std::string& name, GLint frames, GLfloat x, GLfloat y, GLfloat width, GLfloat height, glm::vec2 offset);
+
+	// Plays the specified animation.
+	void PlayAnimation(const std::string& animation, GLboolean once = false);
 
 	// Clears the list of animations and offsets.
 	void ResetAnimations();
@@ -37,11 +28,13 @@ protected:
 	// Stops the current animation.
 	void StopAnimation();
 
-	// Logic that happens when an animation is done.
-	virtual void AnimationDone(std::string currentAnimation);
+	// Updates the animated sprite frame counter.
+	virtual void Update(GLfloat elapsedTime);
 
-	// A function used to setup a sprite's animation when the sprite is instantiated.
-	virtual void SetupAnimations();
+	// Passes the sprite's information to the spritebatch from which it is drawn.
+	virtual void Draw(glm::vec2 position);
+
+	void SetVisible(GLboolean visible);
 
 private:
 	std::map<std::string, std::vector<glm::vec4> > animations;

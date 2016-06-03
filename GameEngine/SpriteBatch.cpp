@@ -1,4 +1,5 @@
 #include "SpriteBatch.h"
+#include <algorithm>
 
 
 std::vector<Glyph*> SpriteBatch::glyphs;

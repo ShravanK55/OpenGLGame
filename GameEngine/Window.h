@@ -1,9 +1,5 @@
 #pragma once
 #include <iostream>
-#include <string>
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 #include "Globals.h"
 #include "Input.h"

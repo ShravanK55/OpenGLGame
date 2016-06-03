@@ -121,10 +121,18 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerGraphicsComponent.cpp" />
+    <ClCompile Include="PlayerInputComponent.cpp" />
+    <ClCompile Include="PlayerPhysicsComponent.cpp" />
+    <ClCompile Include="PlayerStateComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerGraphicsComponent.h" />
+    <ClInclude Include="PlayerInputComponent.h" />
+    <ClInclude Include="PlayerPhysicsComponent.h" />
+    <ClInclude Include="PlayerStateComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

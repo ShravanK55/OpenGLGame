@@ -1,4 +1,8 @@
 #include "ResourceManager.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <SOIL/SOIL.h>
 
 
 std::map<std::string, Shader> ResourceManager::shaders;
