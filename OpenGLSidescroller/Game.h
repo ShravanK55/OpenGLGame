@@ -11,9 +11,6 @@ public:
 	Game();
 	~Game();
 
-	// Constructor that calls the init function with the width and height passed.
-	Game(GLfloat width, GLfloat height);
-
 	// Initializes the game, creates window, sets up the camera, loads shaders and sets up the spritebatch.
 	void Init();
 

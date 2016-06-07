@@ -4,7 +4,8 @@
 
 namespace PlayerConstants
 {
-	const GLfloat velocity = 180.0f;
+	const GLfloat VELOCITY_HORIZONTAL = 180.0f;
+	const GLfloat VELOCITY_VERTICAL = 130.0f;
 };
 
 enum class Direction
@@ -28,8 +29,13 @@ public:
 
 	void Update(float elapsedTime);
 
+	void MoveUp();
+	void MoveDown();
 	void MoveRight();
 	void MoveLeft();
+
+	void StopHorizontalMovement();
+	void StopVerticalMovement();
 	void StopMoving();
 
 private:

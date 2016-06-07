@@ -1,12 +1,11 @@
 #include <iostream>
 
 #include "Game.h"
-#include "Globals.h"
 
 
 int main()
 {
-	Game game(Global::SCREEN_WIDTH, Global::SCREEN_HEIGHT);
+	Game game;
 
 	return 0;
 }

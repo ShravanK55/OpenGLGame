@@ -7,13 +7,6 @@ Game::Game() :
 	Init();
 }
 
-Game::Game(GLfloat width, GLfloat height) :
-	width(width),
-	height(height)
-{
-	Init();
-}
-
 Game::~Game()
 {
 	delete window;
@@ -39,7 +32,7 @@ void Game::Init()
 	spriteBatch = new SpriteBatch();
 	spriteBatch->Init(ResourceManager::GetShader("2D Shader"));
 
-	player = new Player(glm::vec2(-48.0f, -42.0f), glm::vec2(96.0f, 84.0f));
+	player = new Player(glm::vec2(-16.0f, -16.0f), glm::vec2(32.0f, 32.0f));
 
 	GameLoop();
 }
@@ -59,7 +52,6 @@ void Game::GameLoop()
 
 		ProcessInput(elapsedTime);
 		Update(elapsedTime);
-		camera->Update(elapsedTime);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
