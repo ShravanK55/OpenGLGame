@@ -24,7 +24,7 @@ void PlayerInputComponent::HandleInput(Input* input)
 {
 	if (!input->WasKeyPressed(GLFW_KEY_A) && !input->WasKeyPressed(GLFW_KEY_D) &&
 		!input->WasKeyPressed(GLFW_KEY_W) && !input->WasKeyPressed(GLFW_KEY_S))
-		physicsComponent->StopMoving();
+		physicsComponent->StopAllMovement();
 
 	else
 	{

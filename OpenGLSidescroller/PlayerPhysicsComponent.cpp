@@ -141,7 +141,7 @@ void PlayerPhysicsComponent::StopVerticalMovement()
 		stateComponent->SetState(PlayerState::IDLE);
 }
 
-void PlayerPhysicsComponent::StopMoving()
+void PlayerPhysicsComponent::StopAllMovement()
 {
 	dx = 0;
 	dy = 0;

@@ -36,7 +36,7 @@ public:
 
 	void StopHorizontalMovement();
 	void StopVerticalMovement();
-	void StopMoving();
+	void StopAllMovement();
 
 private:
 	PlayerStateComponent* stateComponent;
