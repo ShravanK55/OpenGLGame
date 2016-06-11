@@ -5,8 +5,8 @@
 namespace PlayerConstants
 {
 	const GLfloat VELOCITY_HORIZONTAL = 180.0f;
-	const GLfloat VELOCITY_VERTICAL = 130.0f;
-};
+	const GLfloat VELOCITY_VERTICAL = 180.0f;
+}
 
 enum class Direction
 {
