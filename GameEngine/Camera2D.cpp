@@ -19,16 +19,31 @@ Camera2D::~Camera2D() {}
 glm::vec2 Camera2D::GetPosition() const { return position; }
 glm::mat4 Camera2D::GetCameraMatrix() const { return cameraMatrix; }
 
-void Camera2D::SetPosition(const glm::vec2& position) { this->position = position; needsUpdate = true; }
-void Camera2D::SetScale(const GLfloat& scale) { this->scale = scale; needsUpdate = true; }
+void Camera2D::SetPosition(const glm::vec2& position)
+{
+	this->position = position;
+	needsUpdate = true;
+}
+
+void Camera2D::SetScale(const GLfloat& scale)
+{
+	this->scale = scale;
+	needsUpdate = true;
+}
+
+void Camera2D::CenterAt(const glm::vec2& position)
+{
+	this->position = glm::vec2(screenWidth / 2, screenHeight / 2) - position;
+	needsUpdate = true;
+}
 
 void Camera2D::Init(GLfloat screenWidth, GLfloat screenHeight)
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
 	orthoMatrix = glm::ortho(position.x, position.x + screenWidth, position.y, position.y + screenHeight);
-	orthoMatrix = glm::translate(orthoMatrix, glm::vec3((position.x + screenWidth) / 2, (position.y + screenHeight) / 2, 0.0f));
 	cameraMatrix = orthoMatrix;
+	needsUpdate = true;
 }
 
 void Camera2D::Update(GLfloat elapsedTime)

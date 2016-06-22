@@ -5,3 +5,4 @@ deps/
 ipch/
 Debug/
 *.suo
+OpenGLSidescroller/Maps/

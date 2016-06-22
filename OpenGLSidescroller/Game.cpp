@@ -23,6 +23,7 @@ void Game::Init()
 	camera = new Camera2D();
 	camera->Init(width, height);
 	camera->SetScale(2.0f);
+	camera->CenterAt(glm::vec2(0.0f, 0.0f));
 
 	ResourceManager::LoadShader("Shaders/vShader2D.vs", "Shaders/fShader2D.frag", nullptr, "2D Shader");
 
@@ -53,7 +54,7 @@ void Game::GameLoop()
 		ProcessInput(elapsedTime);
 		Update(elapsedTime);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(43.0f / 255.0f, 47.0f / 255.0f, 63.0f / 255.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Draw();
