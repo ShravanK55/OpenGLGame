@@ -6,14 +6,14 @@
 
 
 std::map<std::string, Shader> ResourceManager::shaders;
-std::map<std::string, Texture> ResourceManager::textures;
+std::map<std::string, Texture*> ResourceManager::textures;
 
 ResourceManager::ResourceManager() {}
-ResourceManager::~ResourceManager() {}
+
+ResourceManager::~ResourceManager() { Clear(); }
 
 Shader ResourceManager::GetShader(std::string name) { return shaders[name]; }
-Texture ResourceManager::GetTexture(std::string name) { return textures[name]; }
-
+Texture* ResourceManager::GetTexture(std::string name) { return textures[name]; }
 
 Shader ResourceManager::LoadShader(const GLchar* vShaderFile, const GLchar* fShaderFile, const GLchar* gShaderFile, std::string name)
 {
@@ -86,11 +86,11 @@ Shader ResourceManager::LoadShaderFromFile(const GLchar* vShaderFile, const GLch
 	return shader;
 }
 
-Texture ResourceManager::LoadTexture(const GLchar* textureFile, GLboolean alpha, std::string name)
+Texture* ResourceManager::LoadTexture(const GLchar* textureFile, GLboolean alpha, std::string name)
 {
-	auto mit = textures.find(name);
+	auto itr = textures.find(name);
 
-	if (mit == textures.end())
+	if (itr == textures.end())
 	{
 		textures[name] = LoadTextureFromFile(textureFile, alpha);
 	}
@@ -98,19 +98,19 @@ Texture ResourceManager::LoadTexture(const GLchar* textureFile, GLboolean alpha,
 	return textures[name];
 }
 
-Texture ResourceManager::LoadTextureFromFile(const GLchar* textureFile, GLboolean alpha)
+Texture* ResourceManager::LoadTextureFromFile(const GLchar* textureFile, GLboolean alpha)
 {
-	Texture texture;
+	Texture* texture = new Texture();
 
 	if (!alpha)
 	{
-		texture.SetImageFormat(GL_RGB);
-		texture.SetInternalFormat(GL_RGB);
+		texture->SetImageFormat(GL_RGB);
+		texture->SetInternalFormat(GL_RGB);
 	}
 
 	int width, height;
-	unsigned char* image = SOIL_load_image(textureFile, &width, &height, 0, texture.GetImageFormat() == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
-	texture.Generate(image, width, height);
+	unsigned char* image = SOIL_load_image(textureFile, &width, &height, 0, texture->GetImageFormat() == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
+	texture->Generate(image, width, height);
 	SOIL_free_image_data(image);
 
 	return texture;
@@ -118,4 +118,9 @@ Texture ResourceManager::LoadTextureFromFile(const GLchar* textureFile, GLboolea
 
 void ResourceManager::Clear()
 {
+	for (auto itr = textures.begin(); itr != textures.end(); itr++)
+	{
+		delete itr->second;
+		std::cout << "Texture deleted." << std::endl;
+	}
 }

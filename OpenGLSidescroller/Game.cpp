@@ -9,6 +9,7 @@ Game::Game() :
 
 Game::~Game()
 {
+	ResourceManager::Clear();
 	delete window;
 	delete player;
 	delete camera;

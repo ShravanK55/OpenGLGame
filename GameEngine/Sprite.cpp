@@ -21,11 +21,11 @@ void Sprite::Load(const GLchar* filePath, const GLchar* name, GLboolean alpha)
 }
 
 glm::vec2 Sprite::GetSize() const { return spriteSize; }
-Texture Sprite::GetTexture() const { return texture; }
+Texture Sprite::GetTexture() const { return *texture; }
 
 void Sprite::Draw(glm::vec2 position)
 {
-	SpriteBatch::Draw(texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f);
+	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f);
 }
 
 void Sprite::Update(GLfloat elapsedTime) {}

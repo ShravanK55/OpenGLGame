@@ -23,5 +23,5 @@ public:
 
 protected:
 	glm::vec2 spriteSize;
-	Texture texture;
+	Texture* texture;
 };

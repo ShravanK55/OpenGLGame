@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "ResourceManager.h"
 #include "Camera2D.h"
 #include "Window.h"

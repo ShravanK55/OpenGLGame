@@ -65,7 +65,7 @@ void AnimatedSprite::Draw(glm::vec2 position)
 {
 	if (visible)
 	{
-		SpriteBatch::Draw(texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f);
+		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f);
 	}
 }
 
@@ -78,10 +78,10 @@ void AnimatedSprite::AddAnimation(const std::string& name, GLint frames, GLfloat
 	for (int i = 0; i < frames; i++)
 	{
 		glm::vec4 rectangle;
-		rectangle.x = ((i * width) + x) / texture.GetWidth();
-		rectangle.y = 1.0f - ((y + height) / texture.GetHeight());
-		rectangle.z = width / texture.GetWidth();
-		rectangle.w = height / texture.GetHeight();
+		rectangle.x = ((i * width) + x) / texture->GetWidth();
+		rectangle.y = 1.0f - ((y + height) / texture->GetHeight());
+		rectangle.z = width / texture->GetWidth();
+		rectangle.w = height / texture->GetHeight();
 
 		rectangles.push_back(rectangle);
 	}
