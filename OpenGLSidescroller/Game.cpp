@@ -23,7 +23,7 @@ void Game::Init()
 
 	camera = new Camera2D();
 	camera->Init(width, height);
-	camera->SetScale(2.0f);
+	camera->SetScale(1.0f);
 	camera->CenterAt(glm::vec2(0.0f, 0.0f));
 
 	ResourceManager::LoadShader("Shaders/vShader2D.vs", "Shaders/fShader2D.frag", nullptr, "2D Shader");
@@ -34,7 +34,8 @@ void Game::Init()
 	spriteBatch = new SpriteBatch();
 	spriteBatch->Init(ResourceManager::GetShader("2D Shader"));
 
-	player = new Player(glm::vec2(-16.0f, -16.0f), glm::vec2(32.0f, 32.0f));
+	player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
+						PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
 
 	GameLoop();
 }

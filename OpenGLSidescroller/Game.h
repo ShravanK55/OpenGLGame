@@ -29,7 +29,7 @@ public:
 
 private:
 	Window* window;
-	GLfloat width, height;
+	GLint width, height;
 	Player* player;
 	Camera2D* camera;
 	SpriteBatch* spriteBatch;

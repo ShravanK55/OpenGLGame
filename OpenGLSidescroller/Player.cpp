@@ -1,19 +1,22 @@
 #include "Player.h"
+#include "TransformComponent.h"
 #include "PlayerGraphicsComponent.h"
 #include "PlayerInputComponent.h"
 #include "PlayerPhysicsComponent.h"
 #include "PlayerStateComponent.h"
 
 
-Player::Player(glm::vec2 spawnPoint, glm::vec2 size)
+Player::Player(glm::vec2 spawnPoint, glm::vec2 size, GLfloat rotation, GLfloat scale)
 {
+	TransformComponent* transformComponent = new TransformComponent(this, spawnPoint, size, rotation, scale);
 	PlayerStateComponent* stateComponent = new PlayerStateComponent(this);
-	PlayerPhysicsComponent* physicsComponent = new PlayerPhysicsComponent(this, spawnPoint, size, stateComponent);
+	PlayerPhysicsComponent* physicsComponent = new PlayerPhysicsComponent(this, transformComponent, stateComponent);
 
+	AddComponent(transformComponent);
 	AddComponent(stateComponent);
 	AddComponent(physicsComponent);
 	AddComponent(new PlayerInputComponent(this, stateComponent, physicsComponent));
-	AddComponent(new PlayerGraphicsComponent(this, spawnPoint, size, stateComponent, physicsComponent));
+	AddComponent(new PlayerGraphicsComponent(this, stateComponent, transformComponent));
 }
 
 Player::~Player() {}

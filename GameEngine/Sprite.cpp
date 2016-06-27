@@ -25,7 +25,17 @@ Texture Sprite::GetTexture() const { return *texture; }
 
 void Sprite::Draw(glm::vec2 position)
 {
-	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f);
+	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f, 1.0f);
+}
+
+void Sprite::Draw(glm::vec2 position, GLfloat rotation)
+{
+	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f, rotation, 1.0f);
+}
+
+void Sprite::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale)
+{
+	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f, rotation, scale);
 }
 
 void Sprite::Update(GLfloat elapsedTime) {}

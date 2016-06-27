@@ -9,8 +9,8 @@ class PlayerGraphicsComponent : public GraphicsComponent
 public:
 	PlayerGraphicsComponent();
 	PlayerGraphicsComponent(Entity* owner);
-	PlayerGraphicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size);
-	PlayerGraphicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size, PlayerStateComponent* stateComponent, PlayerPhysicsComponent* physicsComponent);
+	PlayerGraphicsComponent(Entity* owner, TransformComponent* transformComponent);
+	PlayerGraphicsComponent(Entity* owner, PlayerStateComponent* stateComponent, TransformComponent* transformComponent);
 	~PlayerGraphicsComponent();
 
 	void Update(GLfloat elapsedTime);
@@ -21,7 +21,7 @@ public:
 private:
 	AnimatedSprite* playerSprite;
 	PlayerStateComponent* stateComponent;
-	PlayerPhysicsComponent* physicsComponent;
+	TransformComponent* transformComponent;
 
 	// Updates the current animation based on the player's state.
 	void UpdateAnimation();

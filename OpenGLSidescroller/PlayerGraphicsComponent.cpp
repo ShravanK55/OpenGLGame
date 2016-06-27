@@ -1,6 +1,5 @@
 #include "PlayerGraphicsComponent.h"
 
-
 namespace PlayerSpriteConstants
 {
 	const char* FILE_PATH = "Textures/GokuSpriteSheet.png";
@@ -12,7 +11,7 @@ PlayerGraphicsComponent::PlayerGraphicsComponent() {}
 
 PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner) :
 	GraphicsComponent(owner),
-	physicsComponent(nullptr),
+	transformComponent(nullptr),
 	stateComponent(nullptr)
 {
 	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, glm::vec2(0.0f, 0.0f), glm::vec2(32.0f, 32.0f),
@@ -21,24 +20,23 @@ PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner) :
 	UpdateAnimation();
 }
 
-PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size) :
+PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, TransformComponent* transformComponent) :
 	GraphicsComponent(owner),
-	physicsComponent(nullptr),
+	transformComponent(transformComponent),
 	stateComponent(nullptr)
 {
-	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, spawnPoint, size,
+	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, transformComponent->GetPosition(), transformComponent->GetSize(),
 									  PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE);
 	SetupAnimations();
 	UpdateAnimation();
 }
 
-PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size, PlayerStateComponent* stateComponent,
-	PlayerPhysicsComponent* physicsComponent) :
+PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, PlayerStateComponent* stateComponent, TransformComponent* transformComponent) :
 	GraphicsComponent(owner),
-	physicsComponent(physicsComponent),
+	transformComponent(transformComponent),
 	stateComponent(stateComponent)
 {
-	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, spawnPoint, size,
+	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, transformComponent->GetPosition(), transformComponent->GetSize(),
 									  PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE);
 	SetupAnimations();
 	UpdateAnimation();
@@ -54,14 +52,17 @@ void PlayerGraphicsComponent::Update(GLfloat elapsedTime)
 	playerSprite->Update(elapsedTime);
 }
 
-void PlayerGraphicsComponent::Draw() { playerSprite->Draw(physicsComponent->GetPosition()); }
+void PlayerGraphicsComponent::Draw()
+{
+	playerSprite->Draw(transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
+}
 
 void PlayerGraphicsComponent::UpdateAnimation()
 {
 	switch (stateComponent->GetState())
 	{
 	case PlayerState::IDLE:
-		switch (physicsComponent->GetFacing())
+		switch (stateComponent->GetFacing())
 		{
 		case Direction::RIGHT:
 			playerSprite->PlayAnimation("IdleRight");
@@ -79,7 +80,7 @@ void PlayerGraphicsComponent::UpdateAnimation()
 		break;
 
 	case PlayerState::RUNNING:
-		switch (physicsComponent->GetFacing())
+		switch (stateComponent->GetFacing())
 		{
 		case Direction::RIGHT:
 			playerSprite->PlayAnimation("RunRight");

@@ -65,7 +65,23 @@ void AnimatedSprite::Draw(glm::vec2 position)
 {
 	if (visible)
 	{
-		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f);
+		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, 1.0f);
+	}
+}
+
+void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation)
+{
+	if (visible)
+	{
+		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, 1.0f);
+	}
+}
+
+void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale)
+{
+	if (visible)
+	{
+		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, scale);
 	}
 }
 

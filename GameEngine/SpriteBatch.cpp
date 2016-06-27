@@ -43,13 +43,14 @@ void SpriteBatch::End()
 	CreateRenderBatches();
 }
 
-void SpriteBatch::Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const glm::vec4& color)
+void SpriteBatch::Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& scale,
+					   const glm::vec4& color)
 {
 	Glyph* newGlyph = new Glyph();
 	newGlyph->texture = texture;
 	newGlyph->depth = depth;
 
-	newGlyph->topLeft.SetPosition(destRect.x, destRect.y + destRect.w);
+	newGlyph->topLeft.SetPosition(destRect.x, destRect.y + (destRect.w * scale));
 	newGlyph->topLeft.SetColor(color.x, color.y, color.z, color.w);
 	newGlyph->topLeft.SetUV(sourceRect.x, sourceRect.y + sourceRect.w);
 
@@ -57,11 +58,53 @@ void SpriteBatch::Draw(Texture texture, const glm::vec4& sourceRect, const glm::
 	newGlyph->bottomLeft.SetColor(color.x, color.y, color.z, color.w);
 	newGlyph->bottomLeft.SetUV(sourceRect.x, sourceRect.y);
 
-	newGlyph->bottomRight.SetPosition(destRect.x + destRect.z, destRect.y);
+	newGlyph->bottomRight.SetPosition(destRect.x + (destRect.z * scale), destRect.y);
 	newGlyph->bottomRight.SetColor(color.x, color.y, color.z, color.w);
 	newGlyph->bottomRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y);
 
-	newGlyph->topRight.SetPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+	newGlyph->topRight.SetPosition(destRect.x + (destRect.z * scale), destRect.y + (destRect.w * scale));
+	newGlyph->topRight.SetColor(color.x, color.y, color.z, color.w);
+	newGlyph->topRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y + sourceRect.w);
+
+	glyphs.push_back(newGlyph);
+}
+
+void SpriteBatch::Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& angle,
+					   const GLfloat& scale, const glm::vec4& color)
+{
+	glm::vec2 halfSize(destRect.z * scale / 2.0f, destRect.w * scale / 2.0f);
+
+	// Centre the points at the origin.
+	glm::vec2 rTopLeft(-halfSize.x, halfSize.y);
+	glm::vec2 rBottomLeft(-halfSize.x, -halfSize.y);
+	glm::vec2 rBottomRight(halfSize.x, -halfSize.y);
+	glm::vec2 rTopRight(halfSize.x, halfSize.y);
+
+	GLfloat radAngle = glm::radians(angle);
+
+	// Rotate the points about the origin, and return them to their original position.
+	rTopLeft = RotatePoint(rTopLeft, radAngle) + halfSize;
+	rBottomLeft = RotatePoint(rBottomLeft, radAngle) + halfSize;
+	rBottomRight = RotatePoint(rBottomRight, radAngle) + halfSize;
+	rTopRight = RotatePoint(rTopRight, radAngle) + halfSize;
+
+	Glyph* newGlyph = new Glyph();
+	newGlyph->texture = texture;
+	newGlyph->depth = depth;
+
+	newGlyph->topLeft.SetPosition(destRect.x + rTopLeft.x, destRect.y + (rTopLeft.y));
+	newGlyph->topLeft.SetColor(color.x, color.y, color.z, color.w);
+	newGlyph->topLeft.SetUV(sourceRect.x, sourceRect.y + sourceRect.w);
+
+	newGlyph->bottomLeft.SetPosition(destRect.x + rBottomLeft.x, destRect.y + rBottomLeft.y);
+	newGlyph->bottomLeft.SetColor(color.x, color.y, color.z, color.w);
+	newGlyph->bottomLeft.SetUV(sourceRect.x, sourceRect.y);
+
+	newGlyph->bottomRight.SetPosition(destRect.x + (rBottomRight.x), destRect.y + rBottomRight.y);
+	newGlyph->bottomRight.SetColor(color.x, color.y, color.z, color.w);
+	newGlyph->bottomRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y);
+
+	newGlyph->topRight.SetPosition(destRect.x + (rTopRight.x), destRect.y + (rTopRight.y));
 	newGlyph->topRight.SetColor(color.x, color.y, color.z, color.w);
 	newGlyph->topRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y + sourceRect.w);
 
@@ -82,6 +125,16 @@ void SpriteBatch::RenderBatches()
 	}
 
 	glBindVertexArray(0);
+}
+
+glm::vec2 SpriteBatch::RotatePoint(glm::vec2 position, GLfloat angle)
+{
+	glm::vec2 newPosition;
+
+	newPosition.x = (position.x * cos(angle)) - (position.y * sin(angle));
+	newPosition.y = (position.x * sin(angle)) + (position.y * cos(angle));
+
+	return newPosition;
 }
 
 void SpriteBatch::CreateRenderBatches()

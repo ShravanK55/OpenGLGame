@@ -6,7 +6,7 @@
 class Player : public GameObject
 {
 public:
-	Player(glm::vec2 spawnPoint, glm::vec2 size);
+	Player(glm::vec2 spawnPoint, glm::vec2 size, GLfloat rotation = 0.0f, GLfloat scale = 1.0f);
 	~Player();
 
 	void HandleInput(Input* input);

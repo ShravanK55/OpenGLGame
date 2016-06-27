@@ -55,7 +55,12 @@ public:
 	void End();
 
 	// Passing in the details of a game object, a glyph is creating containing information regarding it.
-	static void Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const glm::vec4& color = glm::vec4(1.0f));
+	static void Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& scale,
+					 const glm::vec4& color = glm::vec4(1.0f));
+
+	// Overloaded draw function with rotation. Angle must be in degrees.
+	static void Draw(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& angle,
+					 const GLfloat& scale, const glm::vec4& color = glm::vec4(1.0f));
 
 	// The created batches are now rendered to the screen.
 	void RenderBatches();
@@ -70,6 +75,9 @@ private:
 	std::vector<RenderBatch> renderBatches;
 
 	GlyphSortType sortType;
+
+	// Rotates a given position vector about an angle.
+	static glm::vec2 RotatePoint(glm::vec2 position, GLfloat angle);
 
 	// Creates the render batches, comparing each glyph with the other by the required sort type.
 	void CreateRenderBatches();

@@ -4,8 +4,8 @@
 
 PlayerPhysicsComponent::PlayerPhysicsComponent() :
 	stateComponent(nullptr),
-	dx(0.0f), dy(0.0f),
-	facing(Direction::RIGHT)
+	transformComponent(nullptr),
+	dx(0.0f), dy(0.0f)
 {
 	stateComponent->SetState(PlayerState::IDLE);
 }
@@ -13,26 +13,26 @@ PlayerPhysicsComponent::PlayerPhysicsComponent() :
 PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner) :
 	PhysicsComponent(owner),
 	stateComponent(nullptr),
-	dx(0.0f), dy(0.0f),
-	facing(Direction::RIGHT)
+	transformComponent(nullptr),
+	dx(0.0f), dy(0.0f)
 {
 	stateComponent->SetState(PlayerState::IDLE);
 }
 
-PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size) :
-	PhysicsComponent(owner, spawnPoint, size),
+PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner, TransformComponent* transformComponent) :
+	PhysicsComponent(owner),
+	transformComponent(transformComponent),
 	stateComponent(nullptr),
-	dx(0.0f), dy(0.0f),
-	facing(Direction::RIGHT)
+	dx(0.0f), dy(0.0f)
 {
 	stateComponent->SetState(PlayerState::IDLE);
 }
 
-PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner, glm::vec2 spawnPoint, glm::vec2 size, PlayerStateComponent* stateComponent) :
-	PhysicsComponent(owner, spawnPoint, size),
+PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner, TransformComponent* transformComponent, PlayerStateComponent* stateComponent) :
+	PhysicsComponent(owner),
+	transformComponent(transformComponent),
 	stateComponent(stateComponent),
-	dx(0.0f), dy(0.0f),
-	facing(Direction::RIGHT)
+	dx(0.0f), dy(0.0f)
 {
 	stateComponent->SetState(PlayerState::IDLE);
 }
@@ -40,12 +40,12 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* owner, glm::vec2 spawnPoi
 PlayerPhysicsComponent::~PlayerPhysicsComponent()
 {}
 
-Direction PlayerPhysicsComponent::GetFacing() const { return facing; }
-
 void PlayerPhysicsComponent::Update(float elapsedTime)
 {
-	position.x += dx * elapsedTime;
-	position.y += dy * elapsedTime;
+	glm::vec2 newPosition;
+	newPosition.x = transformComponent->GetPosition().x + (dx * elapsedTime);
+	newPosition.y = transformComponent->GetPosition().y + (dy * elapsedTime);
+	transformComponent->SetPosition(newPosition);
 }
 
 void PlayerPhysicsComponent::MoveUp()
@@ -63,7 +63,7 @@ void PlayerPhysicsComponent::MoveUp()
 		dy = PlayerConstants::VELOCITY_VERTICAL;
 
 	stateComponent->SetState(PlayerState::RUNNING);
-	facing = Direction::UP;
+	stateComponent->SetFacing(Direction::UP);
 }
 
 void PlayerPhysicsComponent::MoveDown()
@@ -80,7 +80,7 @@ void PlayerPhysicsComponent::MoveDown()
 	else
 		dy = -PlayerConstants::VELOCITY_VERTICAL;
 	stateComponent->SetState(PlayerState::RUNNING);
-	facing = Direction::DOWN;
+	stateComponent->SetFacing(Direction::DOWN);
 }
 
 void PlayerPhysicsComponent::MoveLeft()
@@ -97,7 +97,7 @@ void PlayerPhysicsComponent::MoveLeft()
 	else
 		dx = -PlayerConstants::VELOCITY_HORIZONTAL;
 	stateComponent->SetState(PlayerState::RUNNING);
-	facing = Direction::LEFT;
+	stateComponent->SetFacing(Direction::LEFT);
 }
 
 void PlayerPhysicsComponent::MoveRight()
@@ -114,7 +114,7 @@ void PlayerPhysicsComponent::MoveRight()
 	else
 		dx = PlayerConstants::VELOCITY_HORIZONTAL;
 	stateComponent->SetState(PlayerState::RUNNING);
-	facing = Direction::RIGHT;
+	stateComponent->SetFacing(Direction::RIGHT);
 }
 
 void PlayerPhysicsComponent::StopHorizontalMovement()
@@ -122,9 +122,9 @@ void PlayerPhysicsComponent::StopHorizontalMovement()
 	dx = 0;
 
 	if (dy > 0)
-		facing = Direction::UP;
+		stateComponent->SetFacing(Direction::UP);
 	else if (dy < 0)
-		facing = Direction::DOWN;
+		stateComponent->SetFacing(Direction::DOWN);
 	else
 		stateComponent->SetState(PlayerState::IDLE);
 }
@@ -134,9 +134,9 @@ void PlayerPhysicsComponent::StopVerticalMovement()
 	dy = 0;
 
 	if (dx > 0)
-		facing = Direction::RIGHT;
+		stateComponent->SetFacing(Direction::RIGHT);
 	else if (dx < 0)
-		facing = Direction::LEFT;
+		stateComponent->SetFacing(Direction::LEFT);
 	else
 		stateComponent->SetState(PlayerState::IDLE);
 }
