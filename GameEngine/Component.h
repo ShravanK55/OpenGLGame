@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Input.h"
 
 class Entity;
@@ -6,19 +7,24 @@ class Entity;
 class Component
 {
 public:
-	Component() : owner(NULL) {}
+	Component();
+	Component(std::string tag);
 	virtual ~Component() {}
 	
-	void SetOwner(Entity* owner) { this->owner = owner; }
+	std::string GetTag() const;
+	void SetOwner(Entity* owner);
 
-	virtual void HandleInput(Input* input) {}
+	virtual void HandleInput(Input* input);
 	virtual void Update(GLfloat elapsedTime) = 0;
-	virtual void Draw() {}
+	virtual void Draw();
 
 protected:
-	Component(Entity* owner) : owner(owner) {}
+	Entity* owner;
+
+	Component(Entity* owner);
+	Component(Entity* owner, std::string tag);
 
 private:
-	Entity* owner;
+	std::string tag;
 };
 

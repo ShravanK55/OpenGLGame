@@ -1,53 +1,46 @@
 #include "PlayerInputComponent.h"
+#include "Player.h"
 
 
-PlayerInputComponent::PlayerInputComponent() :
-	stateComponent(NULL),
-	physicsComponent(NULL)
+PlayerInputComponent::PlayerInputComponent()
 {}
 
 PlayerInputComponent::PlayerInputComponent(Entity* owner) :
-	InputComponent(owner),
-	stateComponent(NULL),
-	physicsComponent(NULL)
-{}
-
-PlayerInputComponent::PlayerInputComponent(Entity* owner, PlayerStateComponent* stateComponent, PlayerPhysicsComponent* physicsComponent) :
-	InputComponent(owner),
-	stateComponent(stateComponent),
-	physicsComponent(physicsComponent)
+	InputComponent(owner)
 {}
 
 PlayerInputComponent::~PlayerInputComponent() {}
+
+Player* PlayerInputComponent::GetOwner() const { return static_cast<Player*>(owner); }
 
 void PlayerInputComponent::HandleInput(Input* input)
 {
 	if (!input->WasKeyPressed(GLFW_KEY_A) && !input->WasKeyPressed(GLFW_KEY_D) &&
 		!input->WasKeyPressed(GLFW_KEY_W) && !input->WasKeyPressed(GLFW_KEY_S))
-		physicsComponent->StopAllMovement();
+		GetOwner()->GetPhysicsComponent()->StopAllMovement();
 
 	else
 	{
 		if ((!input->WasKeyPressed(GLFW_KEY_A) && !input->WasKeyPressed(GLFW_KEY_D)) ||
 			(input->WasKeyPressed(GLFW_KEY_A) && input->WasKeyPressed(GLFW_KEY_D)))
-			physicsComponent->StopHorizontalMovement();
+			GetOwner()->GetPhysicsComponent()->StopHorizontalMovement();
 		else
 		{
 			if (input->WasKeyPressed(GLFW_KEY_D))
-				physicsComponent->MoveRight();
+				GetOwner()->GetPhysicsComponent()->MoveRight();
 			if (input->WasKeyPressed(GLFW_KEY_A))
-				physicsComponent->MoveLeft();
+				GetOwner()->GetPhysicsComponent()->MoveLeft();
 		}
 
 		if ((!input->WasKeyPressed(GLFW_KEY_W) && !input->WasKeyPressed(GLFW_KEY_S)) ||
 			(input->WasKeyPressed(GLFW_KEY_W) && input->WasKeyPressed(GLFW_KEY_S)))
-			physicsComponent->StopVerticalMovement();
+			GetOwner()->GetPhysicsComponent()->StopVerticalMovement();
 		else
 		{
 			if (input->WasKeyPressed(GLFW_KEY_W))
-				physicsComponent->MoveUp();
+				GetOwner()->GetPhysicsComponent()->MoveUp();
 			if (input->WasKeyPressed(GLFW_KEY_S))
-				physicsComponent->MoveDown();
+				GetOwner()->GetPhysicsComponent()->MoveDown();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 
+class Player;
 
 enum class PlayerState
 {
@@ -23,6 +24,7 @@ public:
 	PlayerStateComponent(Entity* owner);
 	~PlayerStateComponent();
 
+	Player* GetOwner() const;
 	PlayerState GetState() const;
 	Direction GetFacing() const;
 	void SetState(PlayerState state);

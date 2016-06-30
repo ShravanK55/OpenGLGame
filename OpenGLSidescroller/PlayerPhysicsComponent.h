@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "PlayerStateComponent.h"
 
+class Player;
 
 namespace PlayerConstants
 {
@@ -15,9 +16,9 @@ class PlayerPhysicsComponent : public PhysicsComponent
 public:
 	PlayerPhysicsComponent();
 	PlayerPhysicsComponent(Entity* owner);
-	PlayerPhysicsComponent(Entity* owner, TransformComponent* transformComponent);
-	PlayerPhysicsComponent(Entity* owner, TransformComponent* transformComponent, PlayerStateComponent* stateComponent);
 	~PlayerPhysicsComponent();
+
+	Player* GetOwner() const;
 
 	void Update(float elapsedTime);
 
@@ -31,8 +32,6 @@ public:
 	void StopAllMovement();
 
 private:
-	TransformComponent* transformComponent;
-	PlayerStateComponent* stateComponent;
 	GLfloat dx, dy;
 };
 

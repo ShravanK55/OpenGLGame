@@ -5,6 +5,7 @@ Game::Game() :
 	height(Global::SCREEN_HEIGHT)
 {
 	Init();
+	GameLoop();
 }
 
 Game::~Game()
@@ -36,8 +37,6 @@ void Game::Init()
 
 	player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
 						PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
-
-	GameLoop();
 }
 
 void Game::GameLoop()

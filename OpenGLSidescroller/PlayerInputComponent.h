@@ -3,18 +3,17 @@
 #include "PlayerStateComponent.h"
 #include "PlayerPhysicsComponent.h"
 
+class Player;
+
 class PlayerInputComponent : public InputComponent
 {
 public:
 	PlayerInputComponent();
 	PlayerInputComponent(Entity* owner);
-	PlayerInputComponent(Entity* owner, PlayerStateComponent* stateComponent, PlayerPhysicsComponent* physicsComponent);
 	~PlayerInputComponent();
 
-	void HandleInput(Input* input);
+	Player* GetOwner() const;
 
-private:
-	PlayerStateComponent* stateComponent;
-	PlayerPhysicsComponent* physicsComponent;
+	void HandleInput(Input* input);
 };
 

@@ -5,11 +5,11 @@ class PhysicsComponent : public Component
 {
 public:
 	PhysicsComponent() :
-		Component(nullptr)
+		Component("Physics")
 	{}
 
 	PhysicsComponent(Entity* owner) :
-		Component(owner)
+		Component(owner, "Physics")
 	{}
 
 	virtual ~PhysicsComponent() {}

@@ -4,9 +4,11 @@
 class GraphicsComponent : public Component
 {
 public:
-	GraphicsComponent() {}
+	GraphicsComponent() :
+		Component("Graphics")
+	{}
 	GraphicsComponent(Entity* owner) :
-		Component(owner)
+		Component(owner, "Graphics")
 	{}
 	virtual ~GraphicsComponent() {}
 

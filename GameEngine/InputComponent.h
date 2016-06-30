@@ -5,9 +5,11 @@
 class InputComponent : public Component
 {
 public:
-	InputComponent() {}
+	InputComponent() :
+		Component("Input")
+	{}
 	InputComponent(Entity* owner) :
-		Component(owner)
+		Component(owner, "Input")
 	{}
 	virtual ~InputComponent() {}
 

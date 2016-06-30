@@ -6,38 +6,39 @@ class TransformComponent : public Component
 {
 public:
 	TransformComponent() :
+		Component("Transform"),
 		position(glm::vec2(0, 0)),
 		size(glm::vec2(0, 0)),
 		rotation(0.0f),
-		scale(0.0f)
+		scale(1.0f)
 	{}
 
 	TransformComponent(Entity* owner) :
-		Component(owner),
+		Component(owner, "Transform"),
 		position(glm::vec2(0, 0)),
 		size(glm::vec2(0, 0)),
 		rotation(0.0f),
-		scale(0.0f)
+		scale(1.0f)
 	{}
 
 	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size) :
-		Component(owner),
+		Component(owner, "Transform"),
 		position(position),
 		size(size),
 		rotation(0.0f),
-		scale(0.0f)
+		scale(1.0f)
 	{}
 
 	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation) :
-		Component(owner),
+		Component(owner, "Transform"),
 		position(position),
 		size(size),
 		rotation(rotation),
-		scale(0.0f)
+		scale(1.0f)
 	{}
 
 	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale) :
-		Component(owner),
+		Component(owner, "Transform"),
 		position(position),
 		size(size),
 		rotation(rotation),

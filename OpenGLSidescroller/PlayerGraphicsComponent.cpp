@@ -1,4 +1,6 @@
 #include "PlayerGraphicsComponent.h"
+#include "Player.h"
+
 
 namespace PlayerSpriteConstants
 {
@@ -10,9 +12,7 @@ namespace PlayerSpriteConstants
 PlayerGraphicsComponent::PlayerGraphicsComponent() {}
 
 PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner) :
-	GraphicsComponent(owner),
-	transformComponent(nullptr),
-	stateComponent(nullptr)
+	GraphicsComponent(owner)
 {
 	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, glm::vec2(0.0f, 0.0f), glm::vec2(32.0f, 32.0f),
 	                                  PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE);
@@ -20,30 +20,9 @@ PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner) :
 	UpdateAnimation();
 }
 
-PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, TransformComponent* transformComponent) :
-	GraphicsComponent(owner),
-	transformComponent(transformComponent),
-	stateComponent(nullptr)
-{
-	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, transformComponent->GetPosition(), transformComponent->GetSize(),
-									  PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE);
-	SetupAnimations();
-	UpdateAnimation();
-}
-
-PlayerGraphicsComponent::PlayerGraphicsComponent(Entity* owner, PlayerStateComponent* stateComponent, TransformComponent* transformComponent) :
-	GraphicsComponent(owner),
-	transformComponent(transformComponent),
-	stateComponent(stateComponent)
-{
-	playerSprite = new AnimatedSprite(PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME, transformComponent->GetPosition(), transformComponent->GetSize(),
-									  PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE);
-	SetupAnimations();
-	UpdateAnimation();
-}
-
 PlayerGraphicsComponent::~PlayerGraphicsComponent() { delete playerSprite; }
 
+Player* PlayerGraphicsComponent::GetOwner() const { return static_cast<Player*>(owner); }
 glm::vec2 PlayerGraphicsComponent::GetSize() const { return playerSprite->GetSize(); }
 
 void PlayerGraphicsComponent::Update(GLfloat elapsedTime)
@@ -54,15 +33,16 @@ void PlayerGraphicsComponent::Update(GLfloat elapsedTime)
 
 void PlayerGraphicsComponent::Draw()
 {
-	playerSprite->Draw(transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
+	playerSprite->Draw(GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
+					   GetOwner()->GetTransformComponent()->GetScale());
 }
 
 void PlayerGraphicsComponent::UpdateAnimation()
 {
-	switch (stateComponent->GetState())
+	switch (GetOwner()->GetStateComponent()->GetState())
 	{
 	case PlayerState::IDLE:
-		switch (stateComponent->GetFacing())
+		switch (GetOwner()->GetStateComponent()->GetFacing())
 		{
 		case Direction::RIGHT:
 			playerSprite->PlayAnimation("IdleRight");
@@ -80,7 +60,7 @@ void PlayerGraphicsComponent::UpdateAnimation()
 		break;
 
 	case PlayerState::RUNNING:
-		switch (stateComponent->GetFacing())
+		switch (GetOwner()->GetStateComponent()->GetFacing())
 		{
 		case Direction::RIGHT:
 			playerSprite->PlayAnimation("RunRight");
