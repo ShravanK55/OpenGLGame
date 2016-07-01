@@ -21,6 +21,18 @@
     <Filter Include="Source Files\Player">
       <UniqueIdentifier>{979c221c-0b4a-47d9-a0aa-739e17a0a7fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Player\Components">
+      <UniqueIdentifier>{6c149d87-14d8-4b4c-9243-c34dd3de847a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player\Entities">
+      <UniqueIdentifier>{2b687ba9-e48e-43e6-9f55-16efe87a2ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player\Entities">
+      <UniqueIdentifier>{ebb9d089-3074-42b2-bf27-ea34e0a583a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player\Components">
+      <UniqueIdentifier>{149409b2-a1a1-44d1-9d29-c20c26238793}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -30,19 +42,19 @@
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player\Entities</Filter>
     </ClCompile>
     <ClCompile Include="PlayerGraphicsComponent.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInputComponent.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerPhysicsComponent.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStateComponent.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,19 +62,19 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player\Entities</Filter>
     </ClInclude>
     <ClInclude Include="PlayerGraphicsComponent.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInputComponent.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPhysicsComponent.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStateComponent.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

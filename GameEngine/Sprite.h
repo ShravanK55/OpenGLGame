@@ -20,6 +20,12 @@ public:
 	virtual void Draw(glm::vec2 position, GLfloat rotation);
 	virtual void Draw(glm::vec2 position, GLfloat rotation, GLfloat scale);
 
+	// Function to pass the sprite's information to spritebatch, wherein only a portion of the sprite's texture is drawn.
+	virtual void DrawPortion(glm::vec2 position, glm::vec2 size, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture);
+	virtual void DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture);
+	virtual void DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture);
+
+
 	// Function to update the sprite.
 	virtual void Update(GLfloat elapsedTime);
 

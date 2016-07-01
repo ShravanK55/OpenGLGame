@@ -38,4 +38,22 @@ void Sprite::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale)
 	SpriteBatch::Draw(*texture, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), glm::vec4(position, spriteSize), 0.0f, rotation, scale);
 }
 
+void Sprite::DrawPortion(glm::vec2 position, glm::vec2 size, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
+{
+	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	SpriteBatch::Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, 1.0f);
+}
+
+void Sprite::DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
+{
+	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	SpriteBatch::Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, rotation, 1.0f);
+}
+
+void Sprite::DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
+{
+	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	SpriteBatch::Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, rotation, scale);
+}
+
 void Sprite::Update(GLfloat elapsedTime) {}

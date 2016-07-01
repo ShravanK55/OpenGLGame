@@ -157,6 +157,8 @@
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileGraphicsComponent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,8 @@
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileGraphicsComponent.h" />
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Vertex.h" />
