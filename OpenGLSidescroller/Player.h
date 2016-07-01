@@ -7,6 +7,13 @@ class PlayerPhysicsComponent;
 class PlayerInputComponent;
 class PlayerGraphicsComponent;
 
+namespace PlayerSpriteConstants
+{
+	static const char* FILE_PATH = "Textures/GokuSpriteSheet.png";
+	static const char* SPRITE_NAME = "Goku";
+	static const GLfloat TIME_TO_UPDATE = 0.10f;
+};
+
 class Player : public Character
 {
 public:

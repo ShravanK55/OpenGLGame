@@ -6,11 +6,11 @@ class Sprite
 {
 public:
 	Sprite();
-	Sprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLboolean alpha = false);
+	Sprite(const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLboolean alpha = false);
 	virtual ~Sprite();
 
 	// Loads a sprite texture from the specified file path.
-	void Load(const GLchar* filePath, const GLchar* name, GLboolean alpha = false);
+	virtual void Load(const GLchar* filePath, const GLchar* name, GLboolean alpha = true);
 
 	glm::vec2 GetSize() const;
 	Texture GetTexture() const;

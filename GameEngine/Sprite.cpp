@@ -6,10 +6,10 @@ Sprite::Sprite() :
 	spriteSize(glm::vec2(0.0f, 0.0f))
 {}
 
-Sprite::Sprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLboolean alpha) :
+Sprite::Sprite(const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLboolean alpha) :
 	spriteSize(size)
 {
-	Load(filePath, name, alpha);
+	Sprite::Load(filePath, name, alpha);
 }
 
 Sprite::~Sprite()

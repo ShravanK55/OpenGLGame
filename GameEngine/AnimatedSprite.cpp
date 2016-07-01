@@ -12,8 +12,8 @@ AnimatedSprite::AnimatedSprite() :
 	visible(true)
 {}
 
-AnimatedSprite::AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha) :
-	Sprite(filePath, name, position, size, alpha),
+AnimatedSprite::AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha) :
+	Sprite(filePath, name, size, alpha),
 	timeToUpdate(timeToUpdate),
 	currentAnimationOnce(false),
 	currentAnimation(""),
@@ -23,8 +23,7 @@ AnimatedSprite::AnimatedSprite(const GLchar* filePath, const GLchar* name, const
 {}
 
 AnimatedSprite::~AnimatedSprite()
-{
-}
+{}
 
 
 void AnimatedSprite::PlayAnimation(const std::string& animation, GLboolean once)
@@ -44,26 +43,29 @@ void AnimatedSprite::Update(GLfloat elapsedTime)
 
 	timeElapsed += elapsedTime;
 
-	if (timeElapsed > timeToUpdate)
+	if (currentAnimation != "")
 	{
-		timeElapsed -= timeToUpdate;
-
-		if (frameIndex < animations[currentAnimation].size() - 1)
-			frameIndex++;
-
-		else
+		if (timeElapsed > timeToUpdate)
 		{
-			if (currentAnimationOnce)
-				SetVisible(false);
+			timeElapsed -= timeToUpdate;
 
-			frameIndex = 0;
+			if (frameIndex < animations[currentAnimation].size() - 1)
+				frameIndex++;
+
+			else
+			{
+				if (currentAnimationOnce)
+					SetVisible(false);
+
+				frameIndex = 0;
+			}
 		}
 	}
 }
 
 void AnimatedSprite::Draw(glm::vec2 position)
 {
-	if (visible)
+	if (visible && currentAnimation != "")
 	{
 		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, 1.0f);
 	}
@@ -71,7 +73,7 @@ void AnimatedSprite::Draw(glm::vec2 position)
 
 void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation)
 {
-	if (visible)
+	if (visible && currentAnimation != "")
 	{
 		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, 1.0f);
 	}
@@ -79,7 +81,7 @@ void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation)
 
 void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale)
 {
-	if (visible)
+	if (visible && currentAnimation != "")
 	{
 		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, scale);
 	}

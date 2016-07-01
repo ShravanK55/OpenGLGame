@@ -11,7 +11,8 @@ Player::Player(glm::vec2 spawnPoint, glm::vec2 size, GLfloat rotation, GLfloat s
 	Entity::AddComponent(new PlayerStateComponent(this));
 	Entity::AddComponent(new PlayerPhysicsComponent(this));
 	Entity::AddComponent(new PlayerInputComponent(this));
-	Entity::AddComponent(new PlayerGraphicsComponent(this));
+	Entity::AddComponent(new PlayerGraphicsComponent(this, PlayerSpriteConstants::FILE_PATH, PlayerSpriteConstants::SPRITE_NAME,
+	                                                 size, PlayerSpriteConstants::TIME_TO_UPDATE, GL_TRUE));
 }
 
 Player::~Player() {}

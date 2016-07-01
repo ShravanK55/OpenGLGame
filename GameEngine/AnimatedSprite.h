@@ -13,7 +13,7 @@ public:
 	std::string currentAnimation;
 
 	AnimatedSprite();
-	AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& position, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha = false);
+	AnimatedSprite(const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLfloat timeToUpdate, GLboolean alpha = false);
 	~AnimatedSprite();
 
 	// Adds an animation to the list of animations.

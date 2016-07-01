@@ -1,29 +1,27 @@
 #pragma once
-#include "GraphicsComponent.h"
-#include "PlayerPhysicsComponent.h"
+#include "AnimatedGraphicsComponent.h"
 #include "AnimatedSprite.h"
 
 class Player;
 
-class PlayerGraphicsComponent : public GraphicsComponent
+class PlayerGraphicsComponent : public AnimatedGraphicsComponent
 {
 public:
 	PlayerGraphicsComponent();
-	PlayerGraphicsComponent(Entity* owner);
+	PlayerGraphicsComponent(Entity* owner, const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLfloat timeToUpdate,
+							GLboolean alpha = false);
 	~PlayerGraphicsComponent();
 
 	Player* GetOwner() const;
-	glm::vec2 GetSize() const;
 
 	void Update(GLfloat elapsedTime);
 	void Draw();
 
-private:
-	AnimatedSprite* playerSprite;
-
-	// Updates the current animation based on the player's state.
-	void UpdateAnimation();
 	// Sets up the animations for the player.
 	void SetupAnimations();
+
+private:
+	// Updates the current animation based on the player's state.
+	void UpdateAnimation();
 };
 
