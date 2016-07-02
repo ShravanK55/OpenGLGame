@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Window/Input">
       <UniqueIdentifier>{961a8da4-92e3-4ee9-9acb-597223ea2db2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\World">
+      <UniqueIdentifier>{c7eee2d3-70e6-4814-8297-a2fb65878125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{c72d4c6e-cc3b-404f-ac0a-63e755992526}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -113,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="TileGraphicsComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Tileset.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="TileGraphicsComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

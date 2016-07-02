@@ -11,6 +11,7 @@ public:
 	GraphicsComponent();
 	GraphicsComponent(Entity* owner);
 	GraphicsComponent(Entity* owner, const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLboolean alpha = false);
+	GraphicsComponent(Entity* owner, Sprite* sprite);
 	virtual ~GraphicsComponent();
 
 	GameObject* GetOwner() const;

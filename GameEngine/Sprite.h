@@ -25,7 +25,6 @@ public:
 	virtual void DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture);
 	virtual void DrawPortion(glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture);
 
-
 	// Function to update the sprite.
 	virtual void Update(GLfloat elapsedTime);
 

@@ -4,16 +4,16 @@
 
 class Tileset : public Sprite
 {
-	Tileset() : Sprite(), firstGid(0), tileSize(glm::vec2()) {}
+public:
+	Tileset();
 
 	Tileset(const GLchar* filePath, const GLchar* name, int firstGid, const glm::vec2& tilesetSize, const glm::vec2& tileSize,
-			GLboolean alpha = false) :
-		Sprite(filePath, name, tilesetSize, alpha),
-		firstGid(firstGid),
-		tileSize(tileSize)
-	{}
+			GLboolean alpha = false);
 
-	virtual ~Tileset() {}
+	virtual ~Tileset();
+
+	virtual void Update(GLfloat elapsedTime);
+	virtual void Draw(glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture);
 
 private:
 	int firstGid;

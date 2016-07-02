@@ -17,6 +17,10 @@ GraphicsComponent::GraphicsComponent(Entity* owner, const GLchar* filePath, cons
 	sprite = new Sprite(filePath, name, size, alpha);
 }
 
+GraphicsComponent::GraphicsComponent(Entity* owner, Sprite* sprite) :
+	Component(owner, "Graphics"), sprite(sprite)
+{}
+
 GraphicsComponent::~GraphicsComponent() { delete sprite; }
 
 GameObject* GraphicsComponent::GetOwner() const { return static_cast<GameObject*>(owner); }

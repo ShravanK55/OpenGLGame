@@ -151,6 +151,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileGraphicsComponent.cpp" />
+    <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +175,7 @@
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
