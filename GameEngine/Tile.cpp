@@ -1,15 +1,16 @@
 #include "Tile.h"
 #include "TileGraphicsComponent.h"
+#include "Tileset.h"
 
 
 Tile::Tile() :
 	GameObject()
 {}
 
-Tile::Tile(glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 tilesetPosition) :
+Tile::Tile(Tileset* tileset, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 tilesetPosition) :
 	GameObject(position, size, rotation, scale)
 {
-	Entity::AddComponent(new TileGraphicsComponent());
+	Entity::AddComponent(new TileGraphicsComponent(this, tileset, tilesetPosition));
 }
 
 Tile::~Tile() {}

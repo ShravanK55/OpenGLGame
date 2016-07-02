@@ -67,6 +67,12 @@
     <Filter Include="Source Files\World">
       <UniqueIdentifier>{c72d4c6e-cc3b-404f-ac0a-63e755992526}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\tinyxml2">
+      <UniqueIdentifier>{e2113e4c-52d2-481a-992b-e7381b4149b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tinyxml2">
+      <UniqueIdentifier>{69b07553-323e-4904-8edc-33c27f859011}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -125,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Source Files\tinyxml2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Header Files\tinyxml2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

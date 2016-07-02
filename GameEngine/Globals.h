@@ -4,8 +4,8 @@
 
 struct Global
 {
-	static const GLint SCREEN_WIDTH = 1024;
-	static const GLint SCREEN_HEIGHT = 768;
+	static const GLint SCREEN_WIDTH = 800;
+	static const GLint SCREEN_HEIGHT = 600;
 };
 
 namespace PlayerConstants

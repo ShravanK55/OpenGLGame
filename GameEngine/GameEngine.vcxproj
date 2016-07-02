@@ -161,6 +161,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileGraphicsComponent.cpp" />
     <ClCompile Include="Tileset.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileGraphicsComponent.h" />
     <ClInclude Include="Tileset.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
