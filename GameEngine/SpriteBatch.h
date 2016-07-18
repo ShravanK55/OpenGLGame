@@ -8,8 +8,9 @@
 
 
 // Contains information regarding a particular object to be drawn to the screen.
-struct Glyph
+class Glyph
 {
+public:
 	Texture texture;
 	GLfloat depth;
 
@@ -17,6 +18,79 @@ struct Glyph
 	Vertex bottomLeft;
 	Vertex topRight;
 	Vertex bottomRight;
+
+	Glyph() {}
+
+	Glyph(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& scale,
+		  const glm::vec4& color) :
+		texture(texture),
+		depth(depth)
+	{
+		topLeft.SetPosition(destRect.x, destRect.y + (destRect.w * scale));
+		topLeft.SetColor(color.x, color.y, color.z, color.w);
+		topLeft.SetUV(sourceRect.x, sourceRect.y + sourceRect.w);
+
+		bottomLeft.SetPosition(destRect.x, destRect.y);
+		bottomLeft.SetColor(color.x, color.y, color.z, color.w);
+		bottomLeft.SetUV(sourceRect.x, sourceRect.y);
+
+		bottomRight.SetPosition(destRect.x + (destRect.z * scale), destRect.y);
+		bottomRight.SetColor(color.x, color.y, color.z, color.w);
+		bottomRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y);
+
+		topRight.SetPosition(destRect.x + (destRect.z * scale), destRect.y + (destRect.w * scale));
+		topRight.SetColor(color.x, color.y, color.z, color.w);
+		topRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y + sourceRect.w);
+	}
+
+	Glyph(Texture texture, const glm::vec4& sourceRect, const glm::vec4& destRect, const GLfloat& depth, const GLfloat& angle,
+		  const GLfloat& scale, const glm::vec4& color) :
+		texture(texture),
+		depth(depth)
+	{
+		glm::vec2 halfSize(destRect.z * scale / 2.0f, destRect.w * scale / 2.0f);
+
+		// Centre the points at the origin.
+		glm::vec2 rTopLeft(-halfSize.x, halfSize.y);
+		glm::vec2 rBottomLeft(-halfSize.x, -halfSize.y);
+		glm::vec2 rBottomRight(halfSize.x, -halfSize.y);
+		glm::vec2 rTopRight(halfSize.x, halfSize.y);
+
+		GLfloat radAngle = glm::radians(angle);
+
+		// Rotate the points about the origin, and return them to their original position.
+		rTopLeft = RotatePoint(rTopLeft, radAngle) + halfSize;
+		rBottomLeft = RotatePoint(rBottomLeft, radAngle) + halfSize;
+		rBottomRight = RotatePoint(rBottomRight, radAngle) + halfSize;
+		rTopRight = RotatePoint(rTopRight, radAngle) + halfSize;
+
+		topLeft.SetPosition(destRect.x + rTopLeft.x, destRect.y + (rTopLeft.y));
+		topLeft.SetColor(color.x, color.y, color.z, color.w);
+		topLeft.SetUV(sourceRect.x, sourceRect.y + sourceRect.w);
+
+		bottomLeft.SetPosition(destRect.x + rBottomLeft.x, destRect.y + rBottomLeft.y);
+		bottomLeft.SetColor(color.x, color.y, color.z, color.w);
+		bottomLeft.SetUV(sourceRect.x, sourceRect.y);
+
+		bottomRight.SetPosition(destRect.x + (rBottomRight.x), destRect.y + rBottomRight.y);
+		bottomRight.SetColor(color.x, color.y, color.z, color.w);
+		bottomRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y);
+
+		topRight.SetPosition(destRect.x + (rTopRight.x), destRect.y + (rTopRight.y));
+		topRight.SetColor(color.x, color.y, color.z, color.w);
+		topRight.SetUV(sourceRect.x + sourceRect.z, sourceRect.y + sourceRect.w);
+	}
+
+private:
+	glm::vec2 RotatePoint(glm::vec2 position, GLfloat angle)
+	{
+		glm::vec2 newPosition;
+
+		newPosition.x = (position.x * cos(angle)) - (position.y * sin(angle));
+		newPosition.y = (position.x * sin(angle)) + (position.y * cos(angle));
+
+		return newPosition;
+	}
 };
 
 // Type of sorting to be done on glyphs.
@@ -71,7 +145,8 @@ private:
 
 	Shader shader;
 
-	static std::vector<Glyph*> glyphs;
+	static std::vector<Glyph> glyphs;
+	static std::vector<Glyph*> glyphPointers;
 	std::vector<RenderBatch> renderBatches;
 
 	GlyphSortType sortType;
