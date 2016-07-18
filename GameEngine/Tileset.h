@@ -5,6 +5,8 @@
 class Tileset : public Sprite
 {
 public:
+	int firstGid;
+
 	Tileset();
 
 	Tileset(const GLchar* filePath, const GLchar* name, int firstGid, const glm::vec2& tilesetSize, const glm::vec2& tileSize,
@@ -16,6 +18,5 @@ public:
 	virtual void Draw(glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture);
 
 private:
-	int firstGid;
 	glm::vec2 tileSize;
 };

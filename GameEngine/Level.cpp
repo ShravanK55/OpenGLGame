@@ -1,4 +1,5 @@
 #include "Level.h"
+#include <sstream>
 #include "Tileset.h"
 #include "tinyxml2.h"
 
@@ -85,16 +86,60 @@ void Level::LoadLevel(const std::string& mapName)
 			tinyxml2::XMLElement* dataNode = layerNode->FirstChildElement("data");
 			if (dataNode != nullptr)
 			{
-				tinyxml2::XMLElement* tileNode = dataNode->FirstChildElement("tile");
-				while (tileNode)
+				while (dataNode)
 				{
-					int gid;
-					tileNode->QueryIntAttribute("gid", &gid);
+					tinyxml2::XMLElement* tileNode = dataNode->FirstChildElement("tile");
+					if (tileNode != nullptr)
+					{
+						int tileCounter = 0;
 
-					tileNode = tileNode->NextSiblingElement("tile");
+						while (tileNode)
+						{
+							int gid = tileNode->QueryIntAttribute("gid", &gid);
+
+							if (gid == 0)
+							{
+								tileCounter++;
+								tileNode = tileNode->NextSiblingElement("tile");
+								continue;
+							}
+
+							Tileset* tileset = nullptr;
+
+							for (int i = 0; i < tilesets.size(); i++)
+							{
+								if (tilesets[i]->firstGid <= gid)
+								{
+									tileset = tilesets[i];
+									break;
+								}
+							}
+
+							if (tileset->firstGid == -1)
+							{
+								tileCounter++;
+								tileNode = tileNode->NextSiblingElement("tile");
+								continue;
+							}
+
+							int tileX, tileY;
+							tileX = tileWidth * (tileCounter % levelWidth);
+							tileY = tileHeight * (tileCounter / levelWidth);
+
+							int tilesetX, tilesetY;
+							tilesetX = tileWidth * (gid % (static_cast<int>(tileset->GetSize().x / tileWidth)) - 1);
+							tilesetY = tileHeight * (gid / (static_cast<int>(tileset->GetSize().y / tileHeight)));
+
+							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
+							layer->tiles.push_back(tile);
+							tileCounter++;
+
+							tileNode = tileNode->NextSiblingElement("tile");
+						}
+					}
+
+					dataNode = dataNode->NextSiblingElement("data");
 				}
-
-				dataNode = dataNode->NextSiblingElement("data");
 			}
 
 			layers.push_back(layer);
