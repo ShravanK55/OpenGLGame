@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <sstream>
+#include "ResourceManager.h"
 
 Game::Game() :
 	width(Global::SCREEN_WIDTH),
@@ -12,6 +14,7 @@ Game::~Game()
 {
 	ResourceManager::Clear();
 	delete window;
+	delete level;
 	delete player;
 	delete camera;
 	delete spriteBatch;
@@ -34,6 +37,8 @@ void Game::Init()
 
 	spriteBatch = new SpriteBatch();
 	spriteBatch->Init(ResourceManager::GetShader("2D Shader"));
+
+	level = new Level("TrialCave");
 
 	player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
 						PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
@@ -68,12 +73,14 @@ void Game::Update(GLfloat elapsedTime)
 {
 	camera->Update(elapsedTime);
 	ResourceManager::GetShader("2D Shader").SetMatrix4("projection", camera->GetCameraMatrix());
+	level->Update(elapsedTime);
 	player->Update(elapsedTime);
 }
 
 void Game::Draw()
 {
 	spriteBatch->Begin();
+	level->Draw();
 	player->Draw();
 	spriteBatch->End();
 	spriteBatch->RenderBatches();

@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
-#include "ResourceManager.h"
+
 #include "Camera2D.h"
 #include "Window.h"
 #include "SpriteBatch.h"
 #include "Player.h"
+#include "Level.h"
 
 class Game
 {
@@ -30,6 +31,7 @@ public:
 private:
 	Window* window;
 	GLint width, height;
+	Level* level;
 	Player* player;
 	Camera2D* camera;
 	SpriteBatch* spriteBatch;

@@ -15,6 +15,9 @@ public:
 	Level(const std::string& levelName);
 	~Level();
 
+	void Update(GLfloat elapsedTime);
+	void Draw();
+
 private:
 	std::string levelName;
 

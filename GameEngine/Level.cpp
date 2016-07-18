@@ -38,13 +38,11 @@ void Level::LoadLevel(const std::string& mapName)
 	tinyxml2::XMLDocument document;
 	std::stringstream levelPath;
 	levelPath << "Levels/" << mapName << ".tmx";
-	if (document.LoadFile(levelPath.str().c_str()) != tinyxml2::XMLError::XML_SUCCESS)
-	{
-		std::cout << "Could not load the level document!" << std::endl;
-		return;
-	}
 
-	tinyxml2::XMLElement* mapNode = document.FirstChildElement("map");
+	document.LoadFile(levelPath.str().c_str());
+
+	tinyxml2::XMLElement* mapNode = nullptr;
+	mapNode = document.FirstChildElement("map");
 
 	int tileWidth, tileHeight;
 	mapNode->QueryIntAttribute("tilewidth", &tileWidth);
@@ -76,7 +74,8 @@ void Level::LoadLevel(const std::string& mapName)
 		}
 	}
 
-	tinyxml2::XMLElement* layerNode = mapNode->FirstChildElement("layer");
+	tinyxml2::XMLElement* layerNode = nullptr;
+	layerNode = mapNode->FirstChildElement("layer");
 	if (layerNode != nullptr)
 	{
 		while (layerNode)
@@ -95,7 +94,7 @@ void Level::LoadLevel(const std::string& mapName)
 
 						while (tileNode)
 						{
-							int gid = tileNode->QueryIntAttribute("gid", &gid);
+							int gid = tileNode->IntAttribute("gid");
 
 							if (gid == 0)
 							{
@@ -122,15 +121,17 @@ void Level::LoadLevel(const std::string& mapName)
 								continue;
 							}
 
-							int tileX, tileY;
+							int tileX = 0, tileY = 0;
 							tileX = tileWidth * (tileCounter % levelWidth);
 							tileY = tileHeight * (tileCounter / levelWidth);
 
-							int tilesetX, tilesetY;
-							tilesetX = tileWidth * (gid % (static_cast<int>(tileset->GetSize().x / tileWidth)) - 1);
-							tilesetY = tileHeight * (gid / (static_cast<int>(tileset->GetSize().y / tileHeight)));
+							int tilesetWidth = tileset->GetSize().x;
 
-							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
+							int tilesetX, tilesetY;
+							tilesetX = tileWidth * (gid % (tilesetWidth / tileWidth) - 1);
+							tilesetY = tileHeight * (gid / (tilesetWidth / tileWidth));
+
+							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 2.0f, glm::vec2(tilesetX, tilesetY));
 							layer->tiles.push_back(tile);
 							tileCounter++;
 
@@ -145,6 +146,21 @@ void Level::LoadLevel(const std::string& mapName)
 			layers.push_back(layer);
 
 			layerNode = layerNode->NextSiblingElement("layer");
+		}
+	}
+}
+
+void Level::Update(GLfloat elapsedTime)
+{
+}
+
+void Level::Draw()
+{
+	for (int i = 0; i < layers.size(); i++)
+	{
+		for (int j = 0; j < layers[i]->tiles.size(); j++)
+		{
+			layers[i]->tiles[j]->Draw();
 		}
 	}
 }

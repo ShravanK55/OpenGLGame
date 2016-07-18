@@ -1,6 +1,6 @@
 #include "Tileset.h"
 
-Tileset::Tileset() : Sprite(), firstGid(0), tileSize(glm::vec2()) {}
+Tileset::Tileset() : Sprite(), firstGid(-1), tileSize(glm::vec2()) {}
 
 Tileset::Tileset(const GLchar* filePath, const GLchar* name, int firstGid, const glm::vec2& tilesetSize, const glm::vec2& tileSize,
 				 GLboolean alpha) :
