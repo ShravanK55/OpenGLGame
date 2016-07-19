@@ -19,7 +19,7 @@ public:
 
 	TransformComponent* GetTransformComponent()
 	{
-		for (int i = 0; i < components.size(); i++)
+		for (unsigned int i = 0; i < components.size(); i++)
 		{
 			if (components[i]->GetTag() == "Transform")
 				return static_cast<TransformComponent*>(components[i]);

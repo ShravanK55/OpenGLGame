@@ -2,9 +2,6 @@
 #include <algorithm>
 
 
-std::vector<Glyph*> SpriteBatch::glyphPointers;
-std::vector<Glyph> SpriteBatch::glyphs;
-
 RenderBatch::RenderBatch(GLuint offset, GLuint numVertices, Texture texture) :
 	offset(offset),
 	numVertices(numVertices),
@@ -36,7 +33,7 @@ void SpriteBatch::Begin(GlyphSortType sortType)
 void SpriteBatch::End()
 {
 	glyphPointers.resize(glyphs.size());
-	for (int i = 0; i < glyphs.size(); i++)
+	for (unsigned int i = 0; i < glyphs.size(); i++)
 	{
 		glyphPointers[i] = &glyphs[i];
 	}
@@ -63,7 +60,7 @@ void SpriteBatch::RenderBatches()
 
 	glBindVertexArray(vao);
 
-	for (int i = 0; i < renderBatches.size(); i++)
+	for (unsigned int i = 0; i < renderBatches.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		renderBatches[i].texture.Bind();
@@ -105,7 +102,7 @@ void SpriteBatch::CreateRenderBatches()
 	offset += 6;
 
 
-	for (int currentGlyph = 1; currentGlyph < glyphPointers.size(); currentGlyph++)
+	for (unsigned int currentGlyph = 1; currentGlyph < glyphPointers.size(); currentGlyph++)
 	{
 		if (glyphPointers[currentGlyph]->texture.GetID() != glyphPointers[currentGlyph - 1]->texture.GetID())
 			renderBatches.emplace_back(offset, 6, glyphPointers[currentGlyph]->texture);

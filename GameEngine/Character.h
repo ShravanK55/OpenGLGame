@@ -11,6 +11,6 @@ public:
 
 	virtual void HandleInput(Input* input);
 	virtual void Update(GLfloat elapsedTime);
-	virtual void Draw();
+	virtual void Draw(SpriteBatch* spriteBatch);
 };
 

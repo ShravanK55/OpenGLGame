@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 #include <sstream>
 #include "ResourceManager.h"
 
@@ -63,7 +64,7 @@ void Game::GameLoop()
 		glClearColor(43.0f / 255.0f, 47.0f / 255.0f, 63.0f / 255.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		Draw();
+		Draw(spriteBatch);
 
 		glfwSwapBuffers(window->GetWindow());
 	}
@@ -77,11 +78,11 @@ void Game::Update(GLfloat elapsedTime)
 	player->Update(elapsedTime);
 }
 
-void Game::Draw()
+void Game::Draw(SpriteBatch* spriteBatch)
 {
 	spriteBatch->Begin();
-	level->Draw();
-	player->Draw();
+	level->Draw(spriteBatch);
+	player->Draw(spriteBatch);
 	spriteBatch->End();
 	spriteBatch->RenderBatches();
 }

@@ -13,7 +13,7 @@ Tileset::~Tileset() {}
 
 void Tileset::Update(GLfloat elapsedTime) {}
 
-void Tileset::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture)
+void Tileset::Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture)
 {
-	Sprite::DrawPortion(position, tileSize, rotation, scale, positionOnTexture, tileSize);
+	Sprite::DrawPortion(spriteBatch, position, tileSize, rotation, scale, positionOnTexture, tileSize);
 }

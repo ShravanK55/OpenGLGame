@@ -1,7 +1,6 @@
 #pragma once
 #include <map>
 #include <vector>
-
 #include "Sprite.h"
 
 
@@ -32,9 +31,9 @@ public:
 	virtual void Update(GLfloat elapsedTime);
 
 	// Passes the sprite's information to the spritebatch from which it is drawn.
-	virtual void Draw(glm::vec2 position);
-	virtual void Draw(glm::vec2 position, GLfloat rotation);
-	virtual void Draw(glm::vec2 position, GLfloat rotation, GLfloat scale);
+	virtual void Draw(SpriteBatch* spriteBatch, glm::vec2 position);
+	virtual void Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation);
+	virtual void Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation, GLfloat scale);
 
 	void SetVisible(GLboolean visible);
 

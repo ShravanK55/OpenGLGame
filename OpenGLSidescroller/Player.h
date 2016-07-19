@@ -27,5 +27,5 @@ public:
 
 	void HandleInput(Input* input);
 	void Update(GLfloat elapsedTime);
-	void Draw();
+	void Draw(SpriteBatch* spriteBatch);
 };

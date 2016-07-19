@@ -17,7 +17,7 @@ public:
 	GameObject* GetOwner() const;
 
 	virtual void Update(GLfloat elapsedTime);
-	virtual void Draw();
+	virtual void Draw(SpriteBatch* spriteBatch);
 
 protected:
 	AnimatedSprite* sprite;

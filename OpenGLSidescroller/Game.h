@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-
 #include "Camera2D.h"
 #include "Window.h"
 #include "SpriteBatch.h"
@@ -23,7 +21,7 @@ public:
 	void Update(GLfloat elapsedTime);
 
 	// Draws objects to the screen.
-	void Draw();
+	void Draw(SpriteBatch* spriteBatch);
 
 	// Handles the input.
 	void ProcessInput(GLfloat elapsedTime);

@@ -3,6 +3,7 @@
 #include "Input.h"
 
 class Entity;
+class SpriteBatch;
 
 class Component
 {
@@ -16,7 +17,7 @@ public:
 
 	virtual void HandleInput(Input* input);
 	virtual void Update(GLfloat elapsedTime) = 0;
-	virtual void Draw();
+	virtual void Draw(SpriteBatch* spriteBatch);
 
 protected:
 	Entity* owner;

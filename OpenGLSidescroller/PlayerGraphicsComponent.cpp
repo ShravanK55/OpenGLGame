@@ -25,9 +25,9 @@ void PlayerGraphicsComponent::Update(GLfloat elapsedTime)
 	AnimatedGraphicsComponent::Update(elapsedTime);
 }
 
-void PlayerGraphicsComponent::Draw()
+void PlayerGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	AnimatedGraphicsComponent::Draw();
+	AnimatedGraphicsComponent::Draw(spriteBatch);
 }
 
 void PlayerGraphicsComponent::UpdateAnimation()

@@ -16,7 +16,7 @@ public:
 	~Level();
 
 	void Update(GLfloat elapsedTime);
-	void Draw();
+	void Draw(SpriteBatch* spriteBatch);
 
 private:
 	std::string levelName;

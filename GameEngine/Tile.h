@@ -11,6 +11,6 @@ public:
 	virtual ~Tile();
 
 	virtual void Update(GLfloat elapsedTime);
-	virtual void Draw();
+	virtual void Draw(SpriteBatch* spriteBatch);
 };
 

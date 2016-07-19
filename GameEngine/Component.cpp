@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "Entity.h"
+#include "SpriteBatch.h"
 
 
 Component::Component() :
@@ -22,4 +23,4 @@ std::string Component::GetTag() const { return tag; }
 void Component::SetOwner(Entity* owner) { this->owner = owner; }
 
 void Component::HandleInput(Input* input) {}
-void Component::Draw() {}
+void Component::Draw(SpriteBatch* spriteBatch) {}

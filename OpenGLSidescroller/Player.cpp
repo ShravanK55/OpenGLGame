@@ -20,7 +20,7 @@ Player::~Player() {}
 
 PlayerGraphicsComponent* Player::GetGraphicsComponent() const
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetTag() == "Graphics")
 			return static_cast<PlayerGraphicsComponent*>(components[i]);
@@ -31,7 +31,7 @@ PlayerGraphicsComponent* Player::GetGraphicsComponent() const
 
 PlayerInputComponent* Player::GetInputComponent() const
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetTag() == "Input")
 			return static_cast<PlayerInputComponent*>(components[i]);
@@ -42,7 +42,7 @@ PlayerInputComponent* Player::GetInputComponent() const
 
 PlayerPhysicsComponent* Player::GetPhysicsComponent() const
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetTag() == "Physics")
 			return static_cast<PlayerPhysicsComponent*>(components[i]);
@@ -53,7 +53,7 @@ PlayerPhysicsComponent* Player::GetPhysicsComponent() const
 
 PlayerStateComponent* Player::GetStateComponent() const
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetTag() == "State")
 			return static_cast<PlayerStateComponent*>(components[i]);
@@ -64,7 +64,7 @@ PlayerStateComponent* Player::GetStateComponent() const
 
 void Player::HandleInput(Input* input)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		components[i]->HandleInput(input);
 	}
@@ -72,16 +72,16 @@ void Player::HandleInput(Input* input)
 
 void Player::Update(GLfloat elapsedTime)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		components[i]->Update(elapsedTime);
 	}
 }
 
-void Player::Draw()
+void Player::Draw(SpriteBatch* spriteBatch)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		components[i]->Draw();
+		components[i]->Draw(spriteBatch);
 	}
 }

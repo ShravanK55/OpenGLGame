@@ -22,12 +22,12 @@ Level::Level(const std::string& levelName) :
 
 Level::~Level()
 {
-	for (int i = 0; i < tilesets.size(); i++)
+	for (unsigned int i = 0; i < tilesets.size(); i++)
 	{
 		delete tilesets[i];
 	}
 
-	for (int i = 0; i < layers.size(); i++)
+	for (unsigned int i = 0; i < layers.size(); i++)
 	{
 		delete layers[i];
 	}
@@ -105,7 +105,7 @@ void Level::LoadLevel(const std::string& mapName)
 
 							Tileset* tileset = nullptr;
 
-							for (int i = 0; i < tilesets.size(); i++)
+							for (unsigned int i = 0; i < tilesets.size(); i++)
 							{
 								if (tilesets[i]->firstGid <= gid)
 								{
@@ -125,13 +125,13 @@ void Level::LoadLevel(const std::string& mapName)
 							tileX = tileWidth * (tileCounter % levelWidth);
 							tileY = tileHeight * (tileCounter / levelWidth);
 
-							int tilesetWidth = tileset->GetSize().x;
+							int tilesetWidth = static_cast<int>(tileset->GetSize().x);
 
 							int tilesetX, tilesetY;
 							tilesetX = tileWidth * (gid % (tilesetWidth / tileWidth) - 1);
 							tilesetY = tileHeight * (gid / (tilesetWidth / tileWidth));
 
-							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 2.0f, glm::vec2(tilesetX, tilesetY));
+							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
 							layer->tiles.push_back(tile);
 							tileCounter++;
 
@@ -154,13 +154,13 @@ void Level::Update(GLfloat elapsedTime)
 {
 }
 
-void Level::Draw()
+void Level::Draw(SpriteBatch* spriteBatch)
 {
-	for (int i = 0; i < layers.size(); i++)
+	for (unsigned int i = 0; i < layers.size(); i++)
 	{
-		for (int j = 0; j < layers[i]->tiles.size(); j++)
+		for (unsigned int j = 0; j < layers[i]->tiles.size(); j++)
 		{
-			layers[i]->tiles[j]->Draw();
+			layers[i]->tiles[j]->Draw(spriteBatch);
 		}
 	}
 }

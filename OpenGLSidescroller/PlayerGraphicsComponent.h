@@ -15,7 +15,7 @@ public:
 	Player* GetOwner() const;
 
 	void Update(GLfloat elapsedTime);
-	void Draw();
+	void Draw(SpriteBatch* spriteBatch);
 
 	// Sets up the animations for the player.
 	void SetupAnimations();

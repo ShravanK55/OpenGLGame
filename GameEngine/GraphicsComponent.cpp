@@ -27,8 +27,8 @@ GameObject* GraphicsComponent::GetOwner() const { return static_cast<GameObject*
 
 void GraphicsComponent::Update(GLfloat elapsedTime) { sprite->Update(elapsedTime); }
 
-void GraphicsComponent::Draw()
+void GraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	sprite->Draw(GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
+	sprite->Draw(spriteBatch, GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
 				 GetOwner()->GetTransformComponent()->GetScale());
 }

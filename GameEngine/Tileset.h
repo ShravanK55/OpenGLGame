@@ -15,7 +15,7 @@ public:
 	virtual ~Tileset();
 
 	virtual void Update(GLfloat elapsedTime);
-	virtual void Draw(glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture);
+	virtual void Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture);
 
 private:
 	glm::vec2 tileSize;

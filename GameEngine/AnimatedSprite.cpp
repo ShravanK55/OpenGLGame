@@ -63,27 +63,27 @@ void AnimatedSprite::Update(GLfloat elapsedTime)
 	}
 }
 
-void AnimatedSprite::Draw(glm::vec2 position)
+void AnimatedSprite::Draw(SpriteBatch* spriteBatch, glm::vec2 position)
 {
 	if (visible && currentAnimation != "")
 	{
-		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, 1.0f);
+		spriteBatch->Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, 1.0f);
 	}
 }
 
-void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation)
+void AnimatedSprite::Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation)
 {
 	if (visible && currentAnimation != "")
 	{
-		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, 1.0f);
+		spriteBatch->Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, 1.0f);
 	}
 }
 
-void AnimatedSprite::Draw(glm::vec2 position, GLfloat rotation, GLfloat scale)
+void AnimatedSprite::Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation, GLfloat scale)
 {
 	if (visible && currentAnimation != "")
 	{
-		SpriteBatch::Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, scale);
+		spriteBatch->Draw(*texture, animations[currentAnimation][frameIndex], glm::vec4(position, spriteSize), 0.0f, rotation, scale);
 	}
 }
 

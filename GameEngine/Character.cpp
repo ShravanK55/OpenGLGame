@@ -14,7 +14,7 @@ Character::~Character() {}
 
 void Character::HandleInput(Input* input)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		components[i]->HandleInput(input);
 	}
@@ -22,16 +22,16 @@ void Character::HandleInput(Input* input)
 
 void Character::Update(GLfloat elapsedTime)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		components[i]->Update(elapsedTime);
 	}
 }
 
-void Character::Draw()
+void Character::Draw(SpriteBatch* spriteBatch)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		components[i]->Draw();
+		components[i]->Draw(spriteBatch);
 	}
 }

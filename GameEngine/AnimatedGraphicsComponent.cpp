@@ -27,8 +27,8 @@ void AnimatedGraphicsComponent::Update(GLfloat elapsedTime)
 	sprite->Update(elapsedTime);
 }
 
-void AnimatedGraphicsComponent::Draw()
+void AnimatedGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	sprite->Draw(GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
+	sprite->Draw(spriteBatch, GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
 				 GetOwner()->GetTransformComponent()->GetScale());
 }

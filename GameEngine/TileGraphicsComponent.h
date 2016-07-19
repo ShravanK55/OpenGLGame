@@ -15,7 +15,7 @@ public:
 	Tile* GetOwner() const;
 
 	virtual void Update(GLfloat elapsedTime);
-	virtual void Draw();
+	virtual void Draw(SpriteBatch* spriteBatch);
 
 private:
 	Tileset* tileset;

@@ -21,8 +21,8 @@ Tile* TileGraphicsComponent::GetOwner() const { return static_cast<Tile*>(owner)
 
 void TileGraphicsComponent::Update(GLfloat elapsedTime) {}
 
-void TileGraphicsComponent::Draw()
+void TileGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	tileset->Draw(GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
+	tileset->Draw(spriteBatch, GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
 				  GetOwner()->GetTransformComponent()->GetScale(), tilesetPosition);
 }

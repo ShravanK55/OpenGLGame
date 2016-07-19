@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" backgroundcolor="#2b2f3f" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="32" height="24" tilewidth="32" tileheight="32" backgroundcolor="#2b2f3f" nextobjectid="1">
  <tileset firstgid="1" name="CaveTileset" tilewidth="32" tileheight="32" tilecount="18" columns="3">
   <image source="../Textures/CaveTileset.png" width="96" height="192"/>
  </tileset>

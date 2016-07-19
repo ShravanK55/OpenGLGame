@@ -18,16 +18,16 @@ Tile::~Tile() {}
 
 void Tile::Update(GLfloat elapsedTime)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
 		components[i]->Update(elapsedTime);
 	}
 }
 
-void Tile::Draw()
+void Tile::Draw(SpriteBatch* spriteBatch)
 {
-	for (int i = 0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		components[i]->Draw();
+		components[i]->Draw(spriteBatch);
 	}
 }

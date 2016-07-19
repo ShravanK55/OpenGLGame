@@ -9,7 +9,7 @@ class Entity
 public:
 	virtual ~Entity()
 	{
-		for (int i = 0; i < components.size(); i++)
+		for (unsigned int i = 0; i < components.size(); i++)
 		{
 			delete components[i];
 		}
