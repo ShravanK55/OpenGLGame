@@ -49,10 +49,13 @@ void Level::LoadLevel(const std::string& mapName)
 	mapNode->QueryIntAttribute("tileheight", &tileHeight);
 	tileSize = glm::vec2(tileWidth, tileHeight);
 
-	int levelWidth, levelHeight;
-	mapNode->QueryIntAttribute("width", &levelWidth);
-	mapNode->QueryIntAttribute("height", &levelHeight);
-	levelSize = glm::vec2(levelWidth, levelHeight);
+	int hNumTiles, vNumTiles;
+	mapNode->QueryIntAttribute("width", &hNumTiles);
+	mapNode->QueryIntAttribute("height", &vNumTiles);
+	levelSize = glm::vec2(hNumTiles, vNumTiles);
+
+	int levelWidth = tileWidth * hNumTiles;
+	int levelHeight = tileHeight * vNumTiles;
 
 	tinyxml2::XMLElement* tilesetNode = mapNode->FirstChildElement("tileset");
 	if (tilesetNode != nullptr)
@@ -122,14 +125,15 @@ void Level::LoadLevel(const std::string& mapName)
 							}
 
 							int tileX = 0, tileY = 0;
-							tileX = tileWidth * (tileCounter % levelWidth);
-							tileY = tileHeight * (tileCounter / levelWidth);
+							tileX = tileWidth * (tileCounter % hNumTiles);
+							tileY = levelHeight - (tileHeight * (tileCounter / hNumTiles));
 
 							int tilesetWidth = static_cast<int>(tileset->GetSize().x);
+							int tilesetHeight = static_cast<int>(tileset->GetSize().y);
 
 							int tilesetX, tilesetY;
-							tilesetX = tileWidth * (gid % (tilesetWidth / tileWidth) - 1);
-							tilesetY = tileHeight * (gid / (tilesetWidth / tileWidth));
+							tilesetX = tileWidth * ((gid - tileset->firstGid) % (tilesetWidth / tileWidth));
+							tilesetY = tileHeight * ((gid - tileset->firstGid) / (tilesetWidth / tileWidth) + 1);
 
 							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
 							layer->tiles.push_back(tile);
@@ -150,9 +154,7 @@ void Level::LoadLevel(const std::string& mapName)
 	}
 }
 
-void Level::Update(GLfloat elapsedTime)
-{
-}
+void Level::Update(GLfloat elapsedTime) {}
 
 void Level::Draw(SpriteBatch* spriteBatch)
 {

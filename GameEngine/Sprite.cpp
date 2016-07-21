@@ -40,19 +40,19 @@ void Sprite::Draw(SpriteBatch* spriteBatch, glm::vec2 position, GLfloat rotation
 
 void Sprite::DrawPortion(SpriteBatch* spriteBatch, glm::vec2 position, glm::vec2 size, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
 {
-	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	glm::vec4 sourceRect(positionOnTexture.x / spriteSize.x, 1.0f - (positionOnTexture.y / spriteSize.y), sizeOnTexture.x / spriteSize.x, sizeOnTexture.y / spriteSize.y);
 	spriteBatch->Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, 1.0f);
 }
 
 void Sprite::DrawPortion(SpriteBatch* spriteBatch, glm::vec2 position, glm::vec2 size, GLfloat rotation, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
 {
-	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	glm::vec4 sourceRect(positionOnTexture.x / spriteSize.x, 1.0f - (positionOnTexture.y / spriteSize.y), sizeOnTexture.x / spriteSize.x, sizeOnTexture.y / spriteSize.y);
 	spriteBatch->Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, rotation, 1.0f);
 }
 
 void Sprite::DrawPortion(SpriteBatch* spriteBatch, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 positionOnTexture, glm::vec2 sizeOnTexture)
 {
-	glm::vec4 sourceRect(positionOnTexture / spriteSize, sizeOnTexture / spriteSize);
+	glm::vec4 sourceRect(positionOnTexture.x / spriteSize.x, 1.0f - (positionOnTexture.y / spriteSize.y), sizeOnTexture.x / spriteSize.x, sizeOnTexture.y / spriteSize.y);
 	spriteBatch->Draw(*texture, sourceRect, glm::vec4(position, size), 0.0f, rotation, scale);
 }
 
