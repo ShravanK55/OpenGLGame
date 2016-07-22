@@ -9,7 +9,7 @@
 
 	<PlayerGraphicsComponent>
 		<source file_path="Textures/GokuSpriteSheet.png" sprite_name="Goku" width="32" height="" time_to_update="0.10"/>
-
+		
 		<animations>
 			<animation name="IdleDown" frames="1" x="0" y="0" width="32" height="32" offsetX="0" offsetY="0"/>
 			<animation name="RunDown" frames="4" x="32" y="0" width="32" height="32" offsetX="0" offsetY="0"/>
