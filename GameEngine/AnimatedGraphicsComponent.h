@@ -3,24 +3,27 @@
 #include "Component.h"
 
 class AnimatedSprite;
-class GameObject;
 
 class AnimatedGraphicsComponent : public Component
 {
 public:
+	const static char* name;
+
 	AnimatedGraphicsComponent();
 	AnimatedGraphicsComponent(Entity* owner);
-	AnimatedGraphicsComponent(Entity* owner, const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLfloat timeToUpdate,
-							  GLboolean alpha = false);
-	virtual ~AnimatedGraphicsComponent();
+	~AnimatedGraphicsComponent();
 
-	GameObject* GetOwner() const;
+	virtual bool Init(tinyxml2::XMLElement* componentElement);
 
+	static unsigned long GetID();
+	const char* GetName() const;
+
+	void HandleInput(Input* input);
 	virtual void Update(GLfloat elapsedTime);
 	virtual void Draw(SpriteBatch* spriteBatch);
 
 protected:
 	AnimatedSprite* sprite;
 
-	virtual void SetupAnimations() = 0;
+	virtual void SetupAnimations(tinyxml2::XMLElement* animationsNode);
 };

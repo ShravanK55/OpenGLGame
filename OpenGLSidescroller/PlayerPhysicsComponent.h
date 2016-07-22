@@ -1,26 +1,25 @@
 #pragma once
-#include "PhysicsComponent.h"
-#include "TransformComponent.h"
-#include "PlayerStateComponent.h"
+#include "Component.h"
+
 
 class Player;
 
-namespace PlayerConstants
-{
-	const GLfloat VELOCITY_HORIZONTAL = 300.0f;
-	const GLfloat VELOCITY_VERTICAL = 300.0f;
-}
-
-class PlayerPhysicsComponent : public PhysicsComponent
+class PlayerPhysicsComponent : public Component
 {
 public:
+	const static char* name;
+
 	PlayerPhysicsComponent();
 	PlayerPhysicsComponent(Entity* owner);
 	~PlayerPhysicsComponent();
 
-	Player* GetOwner() const;
+	bool Init(tinyxml2::XMLElement* componentElement);
+	static unsigned long GetIDFromName();
+	const char* GetName() const;
 
+	void HandleInput(Input* input);
 	void Update(float elapsedTime);
+	void Draw(SpriteBatch* spriteBatch);
 
 	void MoveUp();
 	void MoveDown();
@@ -33,5 +32,7 @@ public:
 
 private:
 	GLfloat dx, dy;
+	GLfloat horizontalVelocity;
+	GLfloat verticalVelocity;
 };
 

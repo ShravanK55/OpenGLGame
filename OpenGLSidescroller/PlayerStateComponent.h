@@ -20,17 +20,24 @@ enum class Direction
 class PlayerStateComponent : public Component
 {
 public:
+	const static char* name;
+
 	PlayerStateComponent();
 	PlayerStateComponent(Entity* owner);
 	~PlayerStateComponent();
 
-	Player* GetOwner() const;
+	bool Init(tinyxml2::XMLElement* componentElement);
+	static unsigned long GetIDFromName();
+	const char* GetName() const;
+
 	PlayerState GetState() const;
 	Direction GetFacing() const;
 	void SetState(PlayerState state);
 	void SetFacing(Direction facing);
 
+	void HandleInput(Input* input);
 	void Update(float elapsedTime);
+	void Draw(SpriteBatch* spriteBatch);
 
 private:
 	PlayerState state;

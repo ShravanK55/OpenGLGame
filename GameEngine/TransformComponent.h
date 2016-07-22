@@ -5,59 +5,36 @@
 class TransformComponent : public Component
 {
 public:
-	TransformComponent() :
-		Component("Transform"),
-		position(glm::vec2(0, 0)),
-		size(glm::vec2(0, 0)),
-		rotation(0.0f),
-		scale(1.0f)
-	{}
+	const static char* name;
 
-	TransformComponent(Entity* owner) :
-		Component(owner, "Transform"),
-		position(glm::vec2(0, 0)),
-		size(glm::vec2(0, 0)),
-		rotation(0.0f),
-		scale(1.0f)
-	{}
-
-	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size) :
-		Component(owner, "Transform"),
-		position(position),
-		size(size),
-		rotation(0.0f),
-		scale(1.0f)
-	{}
-
-	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation) :
-		Component(owner, "Transform"),
-		position(position),
-		size(size),
-		rotation(rotation),
-		scale(1.0f)
-	{}
-
-	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale) :
-		Component(owner, "Transform"),
-		position(position),
-		size(size),
-		rotation(rotation),
-		scale(scale)
-	{}
+	TransformComponent();
+	TransformComponent(glm::vec2 position, glm::vec2 size);
+	TransformComponent(glm::vec2 position, glm::vec2 size, GLfloat rotation);
+	TransformComponent(glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale);
+	TransformComponent(Entity* owner);
+	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size);
+	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation);
+	TransformComponent(Entity* owner, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale);
 
 	~TransformComponent() {}
 
-	void Update(GLfloat elapsedTime) {}
+	bool Init(tinyxml2::XMLElement* componentElement);
+	static unsigned long GetIDFromName();
+	const char* GetName() const;
 
-	glm::vec2 GetPosition() const { return position; }
-	glm::vec2 GetSize() const { return size; }
-	GLfloat GetRotation() const { return rotation; }
-	GLfloat GetScale() const { return scale; }
+	glm::vec2 GetPosition() const;
+	glm::vec2 GetSize() const;
+	GLfloat GetRotation() const;
+	GLfloat GetScale() const;
 
-	void SetPosition(glm::vec2 position) { this->position = position; }
-	void SetSize(glm::vec2 size) { this->size = size; }
-	void SetRotation(GLfloat rotation) { this->rotation = rotation; }
-	void SetScale(GLfloat scale) { this->scale = scale; }
+	void SetPosition(glm::vec2 position);
+	void SetSize(glm::vec2 size);
+	void SetRotation(GLfloat rotation);
+	void SetScale(GLfloat scale);
+
+	void HandleInput(Input* input);
+	void Update(GLfloat elapsedTime);
+	void Draw(SpriteBatch* spriteBatch);
 
 private:
 	glm::vec2 position;

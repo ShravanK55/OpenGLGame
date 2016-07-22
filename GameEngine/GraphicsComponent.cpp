@@ -1,34 +1,38 @@
 #include "GraphicsComponent.h"
 #include "Sprite.h"
-#include "GameObject.h"
+#include "Entity.h"
+#include "TransformComponent.h"
 
+
+const char* GraphicsComponent::name = "GraphicsComponent";
 
 GraphicsComponent::GraphicsComponent() :
-	Component("Graphics"), sprite(nullptr)
+	Component(), sprite(nullptr)
 {}
 
 GraphicsComponent::GraphicsComponent(Entity* owner) :
-	Component(owner, "Graphics"), sprite(nullptr)
-{}
-
-GraphicsComponent::GraphicsComponent(Entity* owner, const GLchar* filePath, const GLchar* name, const glm::vec2& size, GLboolean alpha) :
-	Component(owner, "Graphics")
-{
-	sprite = new Sprite(filePath, name, size, alpha);
-}
-
-GraphicsComponent::GraphicsComponent(Entity* owner, Sprite* sprite) :
-	Component(owner, "Graphics"), sprite(sprite)
+	Component(owner), sprite(nullptr)
 {}
 
 GraphicsComponent::~GraphicsComponent() { delete sprite; }
 
-GameObject* GraphicsComponent::GetOwner() const { return static_cast<GameObject*>(owner); }
+bool GraphicsComponent::Init(tinyxml2::XMLElement* componentElement)
+{
+	if (componentElement != nullptr)
+		return true;
+	else
+		return false;
+}
+
+unsigned long GraphicsComponent::GetID() { return HashString::HashName(name); }
+const char* GraphicsComponent::GetName() const { return name; }
+
+void GraphicsComponent::HandleInput(Input* input) {}
 
 void GraphicsComponent::Update(GLfloat elapsedTime) { sprite->Update(elapsedTime); }
 
 void GraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	sprite->Draw(spriteBatch, GetOwner()->GetTransformComponent()->GetPosition(), GetOwner()->GetTransformComponent()->GetRotation(),
-				 GetOwner()->GetTransformComponent()->GetScale());
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
+	sprite->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
 }

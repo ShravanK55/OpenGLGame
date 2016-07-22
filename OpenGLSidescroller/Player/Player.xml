@@ -1,0 +1,24 @@
+<Player>
+	<TransformComponent x="0" y="0" width="32" height="32" rotation="0.0" scale="2.0"/>
+
+	<PlayerInputComponent/>
+
+	<PlayerStateComponent/>
+
+	<PlayerPhysicsComponent velocity_horizontal="300.0" velocity_vertical="300.0" />
+
+	<PlayerGraphicsComponent>
+		<source file_path="Textures/GokuSpriteSheet.png" sprite_name="Goku" width="32" height="" time_to_update="0.10"/>
+
+		<animations>
+			<animation name="IdleDown" frames="1" x="0" y="0" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="RunDown" frames="4" x="32" y="0" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="IdleRight" frames="1" x="0" y="32" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="RunRight" frames="4" x="32" y="32" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="IdleLeft" frames="1" x="0" y="64" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="RunLeft" frames="4" x="32" y="64" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="IdleUp" frames="1" x="0" y="96" width="32" height="32" offsetX="0" offsetY="0"/>
+			<animation name="RunUp" frames="4" x="32" y="96" width="32" height="32" offsetX="0" offsetY="0"/>
+		</animations>
+	</AnimatedGraphicsComponent>
+</Player>

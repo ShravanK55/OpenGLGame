@@ -1,33 +1,25 @@
 #include "Tile.h"
-#include "TileGraphicsComponent.h"
 #include "Tileset.h"
 
 
 Tile::Tile() :
-	GameObject()
+	transformComponent(nullptr),
+	tileset(nullptr),
+	tilesetPosition(glm::vec2(0, 0))
 {}
 
-Tile::Tile(Tileset* tileset, glm::vec2 position, glm::vec2 size, GLfloat rotation, GLfloat scale, glm::vec2 tilesetPosition) :
-	GameObject(position, size, rotation, scale)
+Tile::Tile(Tileset* tileset, glm::vec2 position, GLfloat rotation, GLfloat scale, glm::vec2 tilesetPosition) :
+	tileset(tileset),
+	tilesetPosition(tilesetPosition)
 {
-	Entity::AddComponent(new TileGraphicsComponent(this, tileset, tilesetPosition));
+	transformComponent = new TransformComponent(position, tileset->tileSize, rotation, scale);
 }
 
 Tile::~Tile() {}
 
-
-void Tile::Update(GLfloat elapsedTime)
-{
-	for (unsigned int i = 0; i < components.size(); i++)
-	{
-		components[i]->Update(elapsedTime);
-	}
-}
+void Tile::Update(GLfloat elapsedTime) {}
 
 void Tile::Draw(SpriteBatch* spriteBatch)
 {
-	for (unsigned int i = 0; i < components.size(); i++)
-	{
-		components[i]->Draw(spriteBatch);
-	}
+	tileset->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale(), tilesetPosition);
 }

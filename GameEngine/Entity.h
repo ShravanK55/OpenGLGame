@@ -1,30 +1,49 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <map>
 #include "Component.h"
+#include "tinyxml2.h"
 
 
 class Entity
 {
 public:
+	Entity(unsigned long entityID) : id(entityID) {}
+
 	virtual ~Entity()
 	{
-		for (unsigned int i = 0; i < components.size(); i++)
+		for (auto iterator = componentMap.begin(); iterator != componentMap.end(); iterator++)
 		{
-			delete components[i];
+			delete iterator->second;
 		}
 	}
 
-	virtual void Update(GLfloat elapsedTime) = 0;
+	virtual bool Init(tinyxml2::XMLElement*) = 0;
+	virtual void Destroy() = 0;
 
-	virtual void AddComponent(Component* component)
+	unsigned long GetID() const { return id; }
+
+	template <class ComponentType>
+	ComponentType* GetComponent(std::string name)
 	{
-		component->SetOwner(this);
-		components.push_back(component);
+		auto iterator = componentMap.find(HashString::HashName(name));
+
+		if (iterator != componentMap.end())
+			return static_cast<ComponentType*>(iterator->second);
+
+		else
+			return nullptr;
 	}
 
 protected:
-	Entity() {}
-	std::vector<Component*> components;
+	unsigned long id;
+	std::map<unsigned long, Component*> componentMap;
+
+private:
+	void AddComponent(Component* component)
+	{
+		componentMap.insert(std::pair<unsigned long, Component*> (component->GetIDFromName(), component));
+	}
 };
 

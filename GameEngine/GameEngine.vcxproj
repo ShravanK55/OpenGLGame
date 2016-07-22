@@ -144,10 +144,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimatedGraphicsComponent.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -159,25 +159,23 @@
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileGraphicsComponent.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimatedGraphicsComponent.h" />
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="Character.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="HashString.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
@@ -186,7 +184,6 @@
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileGraphicsComponent.h" />
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TransformComponent.h" />
