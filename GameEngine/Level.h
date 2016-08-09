@@ -2,7 +2,7 @@
 #include <GLM/glm.hpp>
 #include <string>
 #include "Tile.h"
-
+/*
 struct Layer
 {
 	std::vector<Tile*> tiles;
@@ -31,4 +31,4 @@ private:
 
 	void LoadLevel(const std::string& mapName);
 };
-
+*/

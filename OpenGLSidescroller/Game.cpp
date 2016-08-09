@@ -15,10 +15,13 @@ Game::~Game()
 {
 	ResourceManager::Clear();
 	delete window;
-	delete level;
+	delete entityManager;
+	delete gameEntityFactory;
+	//delete level;
 	delete player;
 	delete camera;
 	delete spriteBatch;
+	
 }
 
 void Game::Init()
@@ -39,10 +42,15 @@ void Game::Init()
 	spriteBatch = new SpriteBatch();
 	spriteBatch->Init(ResourceManager::GetShader("2D Shader"));
 
-	level = new Level("TrialCave");
+	gameEntityFactory = new GameEntityFactory();
+	entityManager = new EntityManager();
 
-	player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
-						PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
+	entityManager->AddEntity(gameEntityFactory->CreateEntity("Player/Player.xml"));
+
+	//level = new Level("TrialCave");
+
+	//player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
+						//PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
 }
 
 void Game::GameLoop()
@@ -74,22 +82,25 @@ void Game::Update(GLfloat elapsedTime)
 {
 	camera->Update(elapsedTime);
 	ResourceManager::GetShader("2D Shader").SetMatrix4("projection", camera->GetCameraMatrix());
-	level->Update(elapsedTime);
-	player->Update(elapsedTime);
+	entityManager->Update(elapsedTime);
+	//level->Update(elapsedTime);
+	//player->Update(elapsedTime);
 }
 
 void Game::Draw(SpriteBatch* spriteBatch)
 {
 	spriteBatch->Begin();
-	level->Draw(spriteBatch);
-	player->Draw(spriteBatch);
+	entityManager->Draw(spriteBatch);
+	//level->Draw(spriteBatch);
+	//player->Draw(spriteBatch);
 	spriteBatch->End();
 	spriteBatch->RenderBatches();
 }
 
 void Game::ProcessInput(GLfloat elapsedTime)
 {
-	player->HandleInput(window->input);
+	entityManager->HandleInput(window->input);
+	//player->HandleInput(window->input);
 
 	if (window->input->WasKeyPressed(GLFW_KEY_UP))
 		camera->Move(MovementDirection::UP, elapsedTime);

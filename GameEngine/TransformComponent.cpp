@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 
 
-const char* name = "TransformComponent";
+const char* TransformComponent::name = "TransformComponent";
 
 TransformComponent::TransformComponent() :
 	Component(),

@@ -149,6 +149,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashString.h" />

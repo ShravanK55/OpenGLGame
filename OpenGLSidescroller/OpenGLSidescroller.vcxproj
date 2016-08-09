@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameEntityFactory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGraphicsComponent.h" />
     <ClInclude Include="PlayerInputComponent.h" />

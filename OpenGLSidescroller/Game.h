@@ -4,6 +4,8 @@
 #include "SpriteBatch.h"
 #include "Player.h"
 #include "Level.h"
+#include "GameEntityFactory.h"
+#include "EntityManager.h"
 
 class Game
 {
@@ -29,9 +31,11 @@ public:
 private:
 	Window* window;
 	GLint width, height;
-	Level* level;
+	//Level* level;
 	Player* player;
 	Camera2D* camera;
 	SpriteBatch* spriteBatch;
+	GameEntityFactory* gameEntityFactory;
+	EntityManager* entityManager;
 };
 

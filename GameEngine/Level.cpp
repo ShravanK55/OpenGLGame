@@ -3,7 +3,7 @@
 #include "Tileset.h"
 #include "tinyxml2.h"
 
-
+/*
 Level::Level() :
 	levelName(""),
 	playerSpawnPoint(glm::vec2()),
@@ -166,3 +166,4 @@ void Level::Draw(SpriteBatch* spriteBatch)
 		}
 	}
 }
+*/

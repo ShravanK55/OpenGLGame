@@ -27,7 +27,7 @@ const char* PlayerInputComponent::GetName() const { return name; }
 
 void PlayerInputComponent::HandleInput(Input* input)
 {
-	PlayerPhysicsComponent* physicsComponent = owner->GetComponent<PlayerPhysicsComponent>();
+	PlayerPhysicsComponent* physicsComponent = owner->GetComponent<PlayerPhysicsComponent>(PlayerPhysicsComponent::name);
 
 	if (!input->WasKeyPressed(GLFW_KEY_A) && !input->WasKeyPressed(GLFW_KEY_D) &&
 		!input->WasKeyPressed(GLFW_KEY_W) && !input->WasKeyPressed(GLFW_KEY_S))

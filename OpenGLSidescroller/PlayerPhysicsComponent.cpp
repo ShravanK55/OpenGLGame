@@ -41,7 +41,7 @@ void PlayerPhysicsComponent::HandleInput(Input* input) {}
 
 void PlayerPhysicsComponent::Update(float elapsedTime)
 {
-	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>();
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
 
 	glm::vec2 newPosition;
 	newPosition.x = transformComponent->GetPosition().x + (dx * elapsedTime);
@@ -64,7 +64,7 @@ void PlayerPhysicsComponent::MoveUp()
 	else
 		dy = verticalVelocity;
 
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
 	stateComponent->SetState(PlayerState::RUNNING);
 	stateComponent->SetFacing(Direction::UP);
 }
@@ -82,7 +82,7 @@ void PlayerPhysicsComponent::MoveDown()
 	else
 		dy = -verticalVelocity;
 
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
 	stateComponent->SetState(PlayerState::RUNNING);
 	stateComponent->SetFacing(Direction::DOWN);
 }
@@ -100,7 +100,7 @@ void PlayerPhysicsComponent::MoveLeft()
 	else
 		dx = -horizontalVelocity;
 
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
 	stateComponent->SetState(PlayerState::RUNNING);
 	stateComponent->SetFacing(Direction::LEFT);
 }
@@ -118,7 +118,7 @@ void PlayerPhysicsComponent::MoveRight()
 	else
 		dx = horizontalVelocity;
 
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
 	stateComponent->SetState(PlayerState::RUNNING);
 	stateComponent->SetFacing(Direction::RIGHT);
 }
@@ -128,11 +128,11 @@ void PlayerPhysicsComponent::StopHorizontalMovement()
 	dx = 0;
 
 	if (dy > 0)
-		owner->GetComponent<PlayerStateComponent>()->SetFacing(Direction::UP);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetFacing(Direction::UP);
 	else if (dy < 0)
-		owner->GetComponent<PlayerStateComponent>()->SetFacing(Direction::DOWN);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetFacing(Direction::DOWN);
 	else
-		owner->GetComponent<PlayerStateComponent>()->SetState(PlayerState::IDLE);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetState(PlayerState::IDLE);
 }
 
 void PlayerPhysicsComponent::StopVerticalMovement()
@@ -140,16 +140,16 @@ void PlayerPhysicsComponent::StopVerticalMovement()
 	dy = 0;
 
 	if (dx > 0)
-		owner->GetComponent<PlayerStateComponent>()->SetFacing(Direction::RIGHT);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetFacing(Direction::RIGHT);
 	else if (dx < 0)
-		owner->GetComponent<PlayerStateComponent>()->SetFacing(Direction::LEFT);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetFacing(Direction::LEFT);
 	else
-		owner->GetComponent<PlayerStateComponent>()->SetState(PlayerState::IDLE);
+		owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetState(PlayerState::IDLE);
 }
 
 void PlayerPhysicsComponent::StopAllMovement()
 {
 	dx = 0;
 	dy = 0;
-	owner->GetComponent<PlayerStateComponent>()->SetState(PlayerState::IDLE);
+	owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name)->SetState(PlayerState::IDLE);
 }

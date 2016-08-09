@@ -2,6 +2,7 @@
 #include <GLM/glm.hpp>
 #include "Component.h"
 
+
 class TransformComponent : public Component
 {
 public:

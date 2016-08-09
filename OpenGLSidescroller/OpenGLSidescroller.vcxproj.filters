@@ -33,6 +33,12 @@
     <Filter Include="Source Files\Player\Components">
       <UniqueIdentifier>{149409b2-a1a1-44d1-9d29-c20c26238793}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Entity Factory">
+      <UniqueIdentifier>{f4b87a9f-48a1-405c-873f-231355ec4a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Entity Factory">
+      <UniqueIdentifier>{fec46c01-184f-4419-9341-9eea651b1fbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -75,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="PlayerStateComponent.h">
       <Filter>Header Files\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntityFactory.h">
+      <Filter>Header Files\Game Entity Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

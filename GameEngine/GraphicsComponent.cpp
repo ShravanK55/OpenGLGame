@@ -31,6 +31,6 @@ void GraphicsComponent::Update(GLfloat elapsedTime) { sprite->Update(elapsedTime
 
 void GraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>();
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
 	sprite->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
 }

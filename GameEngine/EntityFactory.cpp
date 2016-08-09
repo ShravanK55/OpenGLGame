@@ -25,7 +25,7 @@ Entity* EntityFactory::CreateEntity(const char* filePath)
 		return nullptr;
 	}
 
-	tinyxml2::XMLElement* entityElement = document.FirstChildElement();
+	tinyxml2::XMLElement* entityElement = document.FirstChildElement("Player");
 	if (entityElement != nullptr)
 	{
 		unsigned long entityID = GetNextEntityID();

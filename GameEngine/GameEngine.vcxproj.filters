@@ -82,6 +82,12 @@
     <Filter Include="Source Files\Entity Factory">
       <UniqueIdentifier>{8357d483-7260-4844-9382-dba479f23f7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entity Manager">
+      <UniqueIdentifier>{f286888c-87e0-4abc-86cd-976ea2574d49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity Manager">
+      <UniqueIdentifier>{83582a97-708c-4c21-aef2-f889db0b8884}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -143,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="EntityFactory.cpp">
       <Filter>Source Files\Entity Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Entity Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="EntityFactory.h">
       <Filter>Header Files\Entity Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files\Entity Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

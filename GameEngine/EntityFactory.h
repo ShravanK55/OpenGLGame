@@ -49,7 +49,7 @@ class EntityFactory
 {
 public:
 	EntityFactory();
-	~EntityFactory();
+	virtual ~EntityFactory();
 
 	Entity* CreateEntity(const char* filePath);
 	virtual Component* CreateComponent(tinyxml2::XMLElement* componentElement);

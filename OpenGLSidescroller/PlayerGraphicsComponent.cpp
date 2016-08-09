@@ -3,6 +3,8 @@
 #include "PlayerStateComponent.h"
 
 
+const char* PlayerGraphicsComponent::name = "PlayerGraphicsComponent";
+
 PlayerGraphicsComponent::PlayerGraphicsComponent() :
 	AnimatedGraphicsComponent(owner)
 {}
@@ -28,7 +30,7 @@ void PlayerGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 
 void PlayerGraphicsComponent::UpdateAnimation()
 {
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
 
 	switch (stateComponent->GetState())
 	{

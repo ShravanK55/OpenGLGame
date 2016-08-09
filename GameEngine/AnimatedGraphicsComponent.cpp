@@ -27,7 +27,7 @@ bool AnimatedGraphicsComponent::Init(tinyxml2::XMLElement* componentElement)
 			GLfloat timeToUpdate = sourceNode->FloatAttribute("time_to_update");
 
 			sprite = new AnimatedSprite(filePath.c_str(), spriteName.c_str(),
-										owner->GetComponent<TransformComponent>()->GetSize(), timeToUpdate);
+										owner->GetComponent<TransformComponent>(TransformComponent::name)->GetSize(), timeToUpdate);
 
 			SetupAnimations(sourceNode->NextSiblingElement("animations"));
 
@@ -53,7 +53,7 @@ void AnimatedGraphicsComponent::Update(GLfloat elapsedTime)
 
 void AnimatedGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>();
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
 	sprite->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
 }
 

@@ -35,9 +35,9 @@ public:
 	unsigned long GetID() const { return id; }
 
 	template <class ComponentType>
-	ComponentType* GetComponent()
+	ComponentType* GetComponent(std::string componentName)
 	{
-		auto iterator = componentMap.find(ComponentType::GetName());
+		auto iterator = componentMap.find(componentName);
 
 		if (iterator != componentMap.end())
 			return static_cast<ComponentType*>(iterator->second);
