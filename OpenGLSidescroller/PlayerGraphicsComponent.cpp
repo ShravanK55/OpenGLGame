@@ -1,6 +1,6 @@
 #include "PlayerGraphicsComponent.h"
+#include "Entity.h"
 #include "PlayerStateComponent.h"
-#include "Player.h"
 
 
 PlayerGraphicsComponent::PlayerGraphicsComponent() :
@@ -28,7 +28,7 @@ void PlayerGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 
 void PlayerGraphicsComponent::UpdateAnimation()
 {
-	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>(PlayerStateComponent::name);
+	PlayerStateComponent* stateComponent = owner->GetComponent<PlayerStateComponent>();
 
 	switch (stateComponent->GetState())
 	{
@@ -66,6 +66,7 @@ void PlayerGraphicsComponent::UpdateAnimation()
 			sprite->PlayAnimation("RunDown");
 			break;
 		}
+
 		break;
 	}
 }

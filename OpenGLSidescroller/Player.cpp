@@ -2,7 +2,7 @@
 
 
 Player::Player(unsigned long entityID) :
-	Actor(entityID)
+	Entity(entityID)
 {}
 
 Player::~Player() {}

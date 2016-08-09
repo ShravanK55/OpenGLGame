@@ -76,6 +76,12 @@
     <Filter Include="Header Files\Utilities">
       <UniqueIdentifier>{7b297a23-aeb6-42ba-b7bb-fa2981a8c22a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entity Factory">
+      <UniqueIdentifier>{964be05c-4948-4360-94e1-428a94cbdf70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity Factory">
+      <UniqueIdentifier>{8357d483-7260-4844-9382-dba479f23f7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -132,11 +138,11 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files\tinyxml2</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Source Files\Entity Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,11 +212,11 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Header Files\tinyxml2</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="HashString.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Header Files\Entity Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

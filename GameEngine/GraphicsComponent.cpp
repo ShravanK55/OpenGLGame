@@ -1,5 +1,4 @@
 #include "GraphicsComponent.h"
-#include "Sprite.h"
 #include "Entity.h"
 #include "TransformComponent.h"
 
@@ -24,7 +23,6 @@ bool GraphicsComponent::Init(tinyxml2::XMLElement* componentElement)
 		return false;
 }
 
-unsigned long GraphicsComponent::GetID() { return HashString::HashName(name); }
 const char* GraphicsComponent::GetName() const { return name; }
 
 void GraphicsComponent::HandleInput(Input* input) {}
@@ -33,6 +31,6 @@ void GraphicsComponent::Update(GLfloat elapsedTime) { sprite->Update(elapsedTime
 
 void GraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>();
 	sprite->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
 }

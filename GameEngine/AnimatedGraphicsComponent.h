@@ -1,13 +1,13 @@
 #pragma once
 #include <GLM/glm.hpp>
 #include "Component.h"
+#include "AnimatedSprite.h"
 
-class AnimatedSprite;
 
 class AnimatedGraphicsComponent : public Component
 {
 public:
-	const static char* name;
+	static const char* name;
 
 	AnimatedGraphicsComponent();
 	AnimatedGraphicsComponent(Entity* owner);
@@ -15,7 +15,6 @@ public:
 
 	virtual bool Init(tinyxml2::XMLElement* componentElement);
 
-	static unsigned long GetID();
 	const char* GetName() const;
 
 	void HandleInput(Input* input);

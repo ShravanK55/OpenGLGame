@@ -1,5 +1,4 @@
 #include "AnimatedGraphicsComponent.h"
-#include "AnimatedSprite.h"
 #include "Entity.h"
 #include "TransformComponent.h"
 
@@ -28,7 +27,7 @@ bool AnimatedGraphicsComponent::Init(tinyxml2::XMLElement* componentElement)
 			GLfloat timeToUpdate = sourceNode->FloatAttribute("time_to_update");
 
 			sprite = new AnimatedSprite(filePath.c_str(), spriteName.c_str(),
-										owner->GetComponent<TransformComponent>(TransformComponent::name)->GetSize(), timeToUpdate);
+										owner->GetComponent<TransformComponent>()->GetSize(), timeToUpdate);
 
 			SetupAnimations(sourceNode->NextSiblingElement("animations"));
 
@@ -43,7 +42,6 @@ bool AnimatedGraphicsComponent::Init(tinyxml2::XMLElement* componentElement)
 		return false;
 }
 
-unsigned long AnimatedGraphicsComponent::GetID() { return HashString::HashName(name); }
 const char* AnimatedGraphicsComponent::GetName() const { return name; }
 
 void AnimatedGraphicsComponent::HandleInput(Input* input) {}
@@ -55,7 +53,7 @@ void AnimatedGraphicsComponent::Update(GLfloat elapsedTime)
 
 void AnimatedGraphicsComponent::Draw(SpriteBatch* spriteBatch)
 {
-	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>(TransformComponent::name);
+	TransformComponent* transformComponent = owner->GetComponent<TransformComponent>();
 	sprite->Draw(spriteBatch, transformComponent->GetPosition(), transformComponent->GetRotation(), transformComponent->GetScale());
 }
 

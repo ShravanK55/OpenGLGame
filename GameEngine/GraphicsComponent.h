@@ -1,12 +1,12 @@
 #pragma once
 #include "Component.h"
+#include "Sprite.h"
 
-class Sprite;
 
 class GraphicsComponent : public Component
 {
 public:
-	const static char* name;
+	static const char* name;
 
 	GraphicsComponent();
 	GraphicsComponent(Entity* owner);
@@ -14,7 +14,6 @@ public:
 
 	virtual bool Init(tinyxml2::XMLElement* componentElement);
 
-	static unsigned long GetID();
 	const char* GetName() const;
 
 	void HandleInput(Input* input);
@@ -22,5 +21,6 @@ public:
 	virtual void Draw(SpriteBatch* spriteBatch);
 
 protected:
+
 	Sprite* sprite;
 };

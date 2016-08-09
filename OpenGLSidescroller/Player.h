@@ -1,9 +1,9 @@
 #pragma once
 #include <GLM/glm.hpp>
-#include "Actor.h"
+#include "Entity.h"
 
 
-class Player : public Actor
+class Player : public Entity
 {
 public:
 	Player(unsigned long entityID);

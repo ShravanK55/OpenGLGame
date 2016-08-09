@@ -1,5 +1,5 @@
 #include "PlayerInputComponent.h"
-#include "Player.h"
+#include "Entity.h"
 #include "PlayerStateComponent.h"
 #include "PlayerPhysicsComponent.h"
 
@@ -23,12 +23,11 @@ bool PlayerInputComponent::Init(tinyxml2::XMLElement* componentElement)
 		return false;
 }
 
-unsigned long PlayerInputComponent::GetIDFromName() { return HashString::HashName(name); }
 const char* PlayerInputComponent::GetName() const { return name; }
 
 void PlayerInputComponent::HandleInput(Input* input)
 {
-	PlayerPhysicsComponent* physicsComponent = owner->GetComponent<PlayerPhysicsComponent>(PlayerPhysicsComponent::name);
+	PlayerPhysicsComponent* physicsComponent = owner->GetComponent<PlayerPhysicsComponent>();
 
 	if (!input->WasKeyPressed(GLFW_KEY_A) && !input->WasKeyPressed(GLFW_KEY_D) &&
 		!input->WasKeyPressed(GLFW_KEY_W) && !input->WasKeyPressed(GLFW_KEY_S))

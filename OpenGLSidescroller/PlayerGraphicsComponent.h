@@ -1,12 +1,12 @@
 #pragma once
 #include "AnimatedGraphicsComponent.h"
-#include "AnimatedSprite.h"
 
-class Player;
 
 class PlayerGraphicsComponent : public AnimatedGraphicsComponent
 {
 public:
+	static const char* name;
+
 	PlayerGraphicsComponent();
 	PlayerGraphicsComponent(Entity* owner);
 	~PlayerGraphicsComponent();

@@ -83,7 +83,6 @@ bool TransformComponent::Init(tinyxml2::XMLElement* componentElement)
 		return false;
 }
 
-unsigned long TransformComponent::GetIDFromName() { return HashString::HashName(name); }
 const char* TransformComponent::GetName() const { return name; }
 
 glm::vec2 TransformComponent::GetPosition() const { return position; }

@@ -1,21 +1,20 @@
 #pragma once
-#include <string>
 #include "tinyxml2.h"
 #include "Input.h"
-#include "HashString.h"
 
 class Entity;
 class SpriteBatch;
 
 class Component
 {
+	friend class EntityFactory;
+
 public:
 	Component();
 	Component(Entity* owner);
 	virtual ~Component() {}
 
 	virtual bool Init(tinyxml2::XMLElement* componentElement) = 0;
-	virtual unsigned long GetIDFromName() { return HashString::HashName(""); }
 	virtual const char* GetName() const = 0;
 	void SetOwner(Entity* owner);
 

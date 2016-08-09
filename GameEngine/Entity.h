@@ -8,6 +8,9 @@
 
 class Entity
 {
+	friend class EntityFactory;
+	friend class EntityManager;
+
 public:
 	Entity(unsigned long entityID) : id(entityID) {}
 
@@ -19,15 +22,22 @@ public:
 		}
 	}
 
-	virtual bool Init(tinyxml2::XMLElement*) = 0;
-	virtual void Destroy() = 0;
+	virtual bool Init(tinyxml2::XMLElement* entityElement)
+	{
+		if (entityElement != nullptr)
+			return true;
+		else
+			return false;
+	}
+
+	virtual void Destroy() {}
 
 	unsigned long GetID() const { return id; }
 
 	template <class ComponentType>
-	ComponentType* GetComponent(std::string name)
+	ComponentType* GetComponent()
 	{
-		auto iterator = componentMap.find(HashString::HashName(name));
+		auto iterator = componentMap.find(ComponentType::GetName());
 
 		if (iterator != componentMap.end())
 			return static_cast<ComponentType*>(iterator->second);
@@ -38,12 +48,13 @@ public:
 
 protected:
 	unsigned long id;
-	std::map<unsigned long, Component*> componentMap;
+	std::map<std::string, Component*> componentMap;
 
 private:
 	void AddComponent(Component* component)
 	{
-		componentMap.insert(std::pair<unsigned long, Component*> (component->GetIDFromName(), component));
+		componentMap.insert(std::pair<std::string, Component*> (component->GetName(), component));
+		component->SetOwner(this);
 	}
 };
 

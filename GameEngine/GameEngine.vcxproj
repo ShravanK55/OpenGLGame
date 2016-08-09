@@ -144,11 +144,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimatedGraphicsComponent.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -165,12 +165,12 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimatedGraphicsComponent.h" />
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashString.h" />

@@ -5,7 +5,7 @@
 class TransformComponent : public Component
 {
 public:
-	const static char* name;
+	static const char* name;
 
 	TransformComponent();
 	TransformComponent(glm::vec2 position, glm::vec2 size);
@@ -19,7 +19,7 @@ public:
 	~TransformComponent() {}
 
 	bool Init(tinyxml2::XMLElement* componentElement);
-	static unsigned long GetIDFromName();
+
 	const char* GetName() const;
 
 	glm::vec2 GetPosition() const;

@@ -1,5 +1,4 @@
 #include "PlayerStateComponent.h"
-#include "Player.h"
 
 
 const char* PlayerStateComponent::name = "PlayerStateComponent";
@@ -26,7 +25,6 @@ bool PlayerStateComponent::Init(tinyxml2::XMLElement* componentElement)
 		return false;
 }
 
-unsigned long PlayerStateComponent::GetIDFromName() { return HashString::HashName(name); }
 const char* PlayerStateComponent::GetName() const { return name; }
 
 PlayerState PlayerStateComponent::GetState() const { return state; }

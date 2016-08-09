@@ -2,12 +2,10 @@
 #include "Component.h"
 
 
-class Player;
-
 class PlayerInputComponent : public Component
 {
 public:
-	const static char* name;
+	static const char* name;
 
 	PlayerInputComponent();
 	PlayerInputComponent(Entity* owner);
