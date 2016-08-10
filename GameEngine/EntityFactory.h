@@ -52,7 +52,7 @@ public:
 	virtual ~EntityFactory();
 
 	Entity* CreateEntity(const char* filePath);
-	virtual Component* CreateComponent(tinyxml2::XMLElement* componentElement);
+	virtual Component* CreateComponent(tinyxml2::XMLElement* componentElement, Entity* owner);
 
 	unsigned long GetNextEntityID();
 

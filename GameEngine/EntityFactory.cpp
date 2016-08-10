@@ -18,14 +18,15 @@ EntityFactory::~EntityFactory() {}
 Entity* EntityFactory::CreateEntity(const char* filePath)
 {
 	tinyxml2::XMLDocument document;
-	
-	if (!document.LoadFile(filePath))
+	auto errorCode = document.LoadFile(filePath);
+
+	if (errorCode)
 	{
 		std::cout << "Failed to read the entity's document." << std::endl;
 		return nullptr;
 	}
 
-	tinyxml2::XMLElement* entityElement = document.FirstChildElement("Player");
+	tinyxml2::XMLElement* entityElement = document.FirstChildElement();
 	if (entityElement != nullptr)
 	{
 		unsigned long entityID = GetNextEntityID();
@@ -42,11 +43,9 @@ Entity* EntityFactory::CreateEntity(const char* filePath)
 		{
 			while (componentElement != nullptr)
 			{
-				Component* component = CreateComponent(componentElement);
+				Component* component = CreateComponent(componentElement, entity);
 
-				if (component != nullptr)
-					entity->AddComponent(component);
-				else
+				if (component == nullptr)
 				{
 					std::cout << "Failed to create an entity component. Entity number: " << entityID << std::endl;
 					return nullptr;
@@ -63,7 +62,7 @@ Entity* EntityFactory::CreateEntity(const char* filePath)
 	return nullptr;
 }
 
-Component* EntityFactory::CreateComponent(tinyxml2::XMLElement* componentElement)
+Component* EntityFactory::CreateComponent(tinyxml2::XMLElement* componentElement, Entity* owner)
 {
 	const char* componentName = componentElement->Name();
 
@@ -71,6 +70,9 @@ Component* EntityFactory::CreateComponent(tinyxml2::XMLElement* componentElement
 
 	if (component != nullptr)
 	{
+		owner->AddComponent(component);
+		component->SetOwner(owner);
+
 		if (!component->Init(componentElement))
 		{
 			std::cout << "Problem occurred during initialization of the component." << std::endl;

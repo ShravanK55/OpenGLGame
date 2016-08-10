@@ -54,7 +54,6 @@ private:
 	void AddComponent(Component* component)
 	{
 		componentMap.insert(std::pair<std::string, Component*> (component->GetName(), component));
-		component->SetOwner(this);
 	}
 };
 

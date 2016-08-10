@@ -79,7 +79,7 @@ void AnimatedGraphicsComponent::SetupAnimations(tinyxml2::XMLElement* animations
 
 					sprite->AddAnimation(name, frames, x, y, width, height, glm::vec2(offsetX, offsetY));
 
-					animationNode = animationNode->NextSiblingElement("animations");
+					animationNode = animationNode->NextSiblingElement("animation");
 				}
 			}
 

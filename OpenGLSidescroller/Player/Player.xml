@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Player>
 	<TransformComponent x="0" y="0" width="32" height="32" rotation="0.0" scale="2.0"/>
 
@@ -20,5 +21,5 @@
 			<animation name="IdleUp" frames="1" x="0" y="96" width="32" height="32" offsetX="0" offsetY="0"/>
 			<animation name="RunUp" frames="4" x="32" y="96" width="32" height="32" offsetX="0" offsetY="0"/>
 		</animations>
-	</AnimatedGraphicsComponent>
+	</PlayerGraphicsComponent>
 </Player>
