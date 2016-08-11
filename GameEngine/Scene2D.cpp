@@ -1,39 +1,49 @@
-#include "Level.h"
+#include "Scene2D.h"
 #include <sstream>
+#include "EntityFactory.h"
+#include "EntityManager.h"
+#include "Tile.h"
 #include "Tileset.h"
-#include "tinyxml2.h"
 
-/*
-Level::Level() :
-	levelName(""),
-	playerSpawnPoint(glm::vec2()),
-	levelSize(glm::vec2()),
-	tileSize(glm::vec2())
-{}
 
-Level::Level(const std::string& levelName) :
-	levelName(levelName),
-	playerSpawnPoint(glm::vec2()),
+Scene2D::Scene2D() :
 	levelSize(glm::vec2()),
 	tileSize(glm::vec2())
 {
-	LoadLevel(levelName);
+	entityManager = new EntityManager();
+	entityFactory = new EntityFactory();
 }
 
-Level::~Level()
+Scene2D::~Scene2D()
 {
-	for (unsigned int i = 0; i < tilesets.size(); i++)
-	{
-		delete tilesets[i];
-	}
+	delete entityManager;
+	delete entityFactory;
+}
 
+void Scene2D::HandleInput(Input* input)
+{
+	entityManager->HandleInput(input);
+}
+
+void Scene2D::Update(GLfloat elapsedTime)
+{
+	entityManager->Update(elapsedTime);
+}
+
+void Scene2D::Draw(SpriteBatch* spriteBatch)
+{
 	for (unsigned int i = 0; i < layers.size(); i++)
 	{
-		delete layers[i];
+		for (unsigned int j = 0; j < layers[i]->tiles.size(); j++)
+		{
+			layers[i]->tiles[j]->Draw(spriteBatch);
+		}
 	}
+
+	entityManager->Draw(spriteBatch);
 }
 
-void Level::LoadLevel(const std::string& mapName)
+void Scene2D::LoadScene(const std::string& mapName)
 {
 	tinyxml2::XMLDocument document;
 	std::stringstream levelPath;
@@ -54,8 +64,23 @@ void Level::LoadLevel(const std::string& mapName)
 	mapNode->QueryIntAttribute("height", &vNumTiles);
 	levelSize = glm::vec2(hNumTiles, vNumTiles);
 
-	int levelWidth = tileWidth * hNumTiles;
-	int levelHeight = tileHeight * vNumTiles;
+	GLfloat tileScale = 1.0f;
+
+	tinyxml2::XMLElement* propertiesNode = mapNode->FirstChildElement("properties");
+	tinyxml2::XMLElement* propertyElement = propertiesNode->FirstChildElement("property");
+	if (propertyElement != nullptr)
+	{
+		while (propertyElement != nullptr)
+		{
+			if (propertyElement->Name() == "Tile Scale")
+				tileScale = propertyElement->FloatAttribute("value");
+
+			propertyElement = propertyElement->NextSiblingElement("property");
+		}
+	}
+
+	int levelWidth = tileWidth * tileScale * hNumTiles;
+	int levelHeight = tileHeight * tileScale * vNumTiles;
 
 	tinyxml2::XMLElement* tilesetNode = mapNode->FirstChildElement("tileset");
 	if (tilesetNode != nullptr)
@@ -125,8 +150,8 @@ void Level::LoadLevel(const std::string& mapName)
 							}
 
 							int tileX = 0, tileY = 0;
-							tileX = tileWidth * (tileCounter % hNumTiles);
-							tileY = levelHeight - (tileHeight * (tileCounter / hNumTiles));
+							tileX = tileWidth * (tileCounter % hNumTiles) * tileScale;
+							tileY = levelHeight - (tileHeight * (tileCounter / hNumTiles) * tileScale);
 
 							int tilesetWidth = static_cast<int>(tileset->GetSize().x);
 							int tilesetHeight = static_cast<int>(tileset->GetSize().y);
@@ -135,7 +160,7 @@ void Level::LoadLevel(const std::string& mapName)
 							tilesetX = tileWidth * ((gid - tileset->firstGid) % (tilesetWidth / tileWidth));
 							tilesetY = tileHeight * ((gid - tileset->firstGid) / (tilesetWidth / tileWidth) + 1);
 
-							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), glm::vec2(tileWidth, tileHeight), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
+							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
 							layer->tiles.push_back(tile);
 							tileCounter++;
 
@@ -152,18 +177,58 @@ void Level::LoadLevel(const std::string& mapName)
 			layerNode = layerNode->NextSiblingElement("layer");
 		}
 	}
-}
 
-void Level::Update(GLfloat elapsedTime) {}
-
-void Level::Draw(SpriteBatch* spriteBatch)
-{
-	for (unsigned int i = 0; i < layers.size(); i++)
+	tinyxml2::XMLElement* objectGroupNode = nullptr;
+	objectGroupNode = mapNode->FirstChildElement("objectgroup");
+	if (objectGroupNode != nullptr)
 	{
-		for (unsigned int j = 0; j < layers[i]->tiles.size(); j++)
+		while (objectGroupNode)
 		{
-			layers[i]->tiles[j]->Draw(spriteBatch);
+			if (objectGroupNode->Name() == "Entities")
+			{
+				tinyxml2::XMLElement* objectNode = nullptr;
+				objectNode = objectGroupNode->FirstChildElement("object");
+				if (objectNode != nullptr)
+				{
+					while (objectNode)
+					{
+						LoadEntity(objectNode);
+						objectNode = objectNode->NextSiblingElement("object");
+					}
+				}
+			}
+
+			objectGroupNode = objectGroupNode->NextSiblingElement("objectgroup");
 		}
 	}
 }
-*/
+
+void Scene2D::LoadEntity(tinyxml2::XMLElement* entityNode)
+{
+	std::string entitySource;
+
+	tinyxml2::XMLElement* propertiesNode = nullptr;
+	propertiesNode = entityNode->FirstChildElement("properties");
+	if (propertiesNode != nullptr)
+	{
+		while (propertiesNode)
+		{
+			tinyxml2::XMLElement* propertyNode = nullptr;
+			propertyNode = propertiesNode->FirstChildElement("property");
+			if (propertyNode != nullptr)
+			{
+				while (propertyNode)
+				{
+					if (propertiesNode->Attribute("name") == "Source")
+						entitySource = propertyNode->Attribute("value");
+
+					propertyNode = propertyNode->NextSiblingElement("property");
+				}
+			}
+
+			propertiesNode = propertiesNode->NextSiblingElement("properties");
+		}
+	}
+
+	entityManager->AddEntity(entityFactory->CreateEntity(entitySource.c_str()));
+}

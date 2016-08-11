@@ -18,9 +18,8 @@ EntityFactory::~EntityFactory() {}
 Entity* EntityFactory::CreateEntity(const char* filePath)
 {
 	tinyxml2::XMLDocument document;
-	auto errorCode = document.LoadFile(filePath);
 
-	if (errorCode)
+	if (document.LoadFile(filePath) != tinyxml2::XML_SUCCESS)
 	{
 		std::cout << "Failed to read the entity's document." << std::endl;
 		return nullptr;

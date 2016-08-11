@@ -39,6 +39,12 @@
     <Filter Include="Source Files\Game Entity Factory">
       <UniqueIdentifier>{fec46c01-184f-4419-9341-9eea651b1fbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{2bbf0ac5-b16f-49a7-a4fd-cf5c5cf3dbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\World">
+      <UniqueIdentifier>{054cbdcf-88b9-4133-a47a-b44eb95803ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -62,6 +68,9 @@
     <ClCompile Include="PlayerStateComponent.cpp">
       <Filter>Source Files\Player\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene2D.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -84,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="GameEntityFactory.h">
       <Filter>Header Files\Game Entity Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene2D.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

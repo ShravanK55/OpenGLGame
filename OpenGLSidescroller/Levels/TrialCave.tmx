@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="32" height="24" tilewidth="32" tileheight="32" backgroundcolor="#2b2f3f" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="32" height="24" tilewidth="32" tileheight="32" backgroundcolor="#2b2f3f" nextobjectid="3">
+ <properties>
+  <property name="Tile Scale" value="2.0"/>
+ </properties>
  <tileset firstgid="1" name="CaveTileset" tilewidth="32" tileheight="32" tilecount="18" columns="3">
   <image source="Textures/CaveTileset.png" width="96" height="192"/>
  </tileset>
- <layer name="Tile Layer 1" width="32" height="24">
+ <layer name="Background 1" width="32" height="24">
   <data>
    <tile gid="10"/>
    <tile gid="11"/>
@@ -775,7 +778,7 @@
    <tile gid="18"/>
   </data>
  </layer>
- <layer name="Tile Layer 2" width="32" height="24">
+ <layer name="Background 2" width="32" height="24">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1547,4 +1550,11 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="Entities">
+  <object id="2" name="Player" x="512" y="320" width="32" height="32">
+   <properties>
+    <property name="Source" value="Player/Player.xml"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

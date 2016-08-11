@@ -152,8 +152,8 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Level.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Scene2D.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
@@ -177,9 +177,9 @@
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashString.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Level.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scene2D.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
