@@ -33,12 +33,11 @@ protected:
 	EntityFactory* entityFactory;
 	EntityManager* entityManager;
 
-	virtual void LoadEntity(tinyxml2::XMLElement* entityNode);
-
-private:
 	glm::vec2 levelSize;
 	glm::vec2 tileSize;
 
 	std::vector<Tileset*> tilesets;
 	std::vector<Layer*> layers;
+
+	virtual void LoadEntity(tinyxml2::XMLElement* entityNode);
 };

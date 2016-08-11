@@ -72,7 +72,8 @@ void Scene2D::LoadScene(const std::string& mapName)
 	{
 		while (propertyElement != nullptr)
 		{
-			if (propertyElement->Name() == "Tile Scale")
+			std::string propertyNodeName = propertyElement->Attribute("name");
+			if (propertyNodeName == "Tile Scale")
 				tileScale = propertyElement->FloatAttribute("value");
 
 			propertyElement = propertyElement->NextSiblingElement("property");
@@ -160,7 +161,7 @@ void Scene2D::LoadScene(const std::string& mapName)
 							tilesetX = tileWidth * ((gid - tileset->firstGid) % (tilesetWidth / tileWidth));
 							tilesetY = tileHeight * ((gid - tileset->firstGid) / (tilesetWidth / tileWidth) + 1);
 
-							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), 0.0f, 1.0f, glm::vec2(tilesetX, tilesetY));
+							Tile* tile = new Tile(tileset, glm::vec2(tileX, tileY), 0.0f, tileScale, glm::vec2(tilesetX, tilesetY));
 							layer->tiles.push_back(tile);
 							tileCounter++;
 

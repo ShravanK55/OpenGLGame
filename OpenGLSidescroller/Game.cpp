@@ -29,7 +29,7 @@ void Game::Init()
 	camera = new Camera2D();
 	camera->Init(width, height);
 	camera->SetScale(1.0f);
-	camera->CenterAt(glm::vec2(512.0f, 320.0f));
+	camera->CenterAt(glm::vec2(30.0f, 1500.0f));
 
 	ResourceManager::LoadShader("Shaders/vShader2D.vs", "Shaders/fShader2D.frag", nullptr, "2D Shader");
 
@@ -41,11 +41,6 @@ void Game::Init()
 
 	gameScene = new GameScene2D();
 	gameScene->LoadScene("TrialCave");
-
-	//level = new Level("TrialCave");
-
-	//player = new Player(PlayerConstants::SPAWN_POINT, PlayerConstants::SPRITE_SIZE,
-						//PlayerConstants::DEFAULT_ROTATION, PlayerConstants::SPRITE_SCALE);
 }
 
 void Game::GameLoop()
@@ -78,16 +73,12 @@ void Game::Update(GLfloat elapsedTime)
 	camera->Update(elapsedTime);
 	ResourceManager::GetShader("2D Shader").SetMatrix4("projection", camera->GetCameraMatrix());
 	gameScene->Update(elapsedTime);
-	//level->Update(elapsedTime);
-	//player->Update(elapsedTime);
 }
 
 void Game::Draw(SpriteBatch* spriteBatch)
 {
 	spriteBatch->Begin();
 	gameScene->Draw(spriteBatch);
-	//level->Draw(spriteBatch);
-	//player->Draw(spriteBatch);
 	spriteBatch->End();
 	spriteBatch->RenderBatches();
 }
@@ -95,7 +86,6 @@ void Game::Draw(SpriteBatch* spriteBatch)
 void Game::ProcessInput(GLfloat elapsedTime)
 {
 	gameScene->HandleInput(window->input);
-	//player->HandleInput(window->input);
 
 	if (window->input->WasKeyPressed(GLFW_KEY_UP))
 		camera->Move(MovementDirection::UP, elapsedTime);

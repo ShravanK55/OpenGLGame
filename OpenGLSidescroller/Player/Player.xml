@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Player>
-	<TransformComponent x="0" y="0" width="32" height="32" rotation="0.0" scale="2.0"/>
+	<TransformComponent x="30" y="1500" width="32" height="32" rotation="0.0" scale="2.0"/>
 
 	<PlayerInputComponent/>
 
